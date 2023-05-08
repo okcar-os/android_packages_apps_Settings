@@ -11138,6 +11138,10 @@
     <string name="usb_use_photo_transfers_desc">Transfer photos or files if MTP is not supported (PTP)</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
+         is for USB okcar. -->
+    <string name="usb_use_okcar">OKCAR</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
          is for USB tethering. -->
     <string name="usb_use_tethering">USB tethering</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
@@ -11191,6 +11195,8 @@
     <string name="usb_summary_power_only">Charging connected device</string>
     <!-- Settings item summary for USB preference when set to transferring files via MTP [CHAR LIMIT=NONE] -->
     <string name="usb_summary_file_transfers">File transfer</string>
+    <!-- Settings item summary for USB preference when set to USB okcar -->
+    <string name="usb_summary_okcar">USB okcar</string>
     <!-- Settings item summary for USB preference when set to USB tethering [CHAR LIMIT=NONE] -->
     <string name="usb_summary_tether">USB tethering</string>
     <!-- Settings item summary for USB preference when set to transferring photos via PTP [CHAR LIMIT=NONE] -->

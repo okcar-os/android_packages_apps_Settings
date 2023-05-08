@@ -49,6 +49,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
 
     static {
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_MTP, R.string.usb_use_file_transfers);
+        FUNCTIONS_MAP.put(UsbManager.FUNCTION_OKCAR, R.string.usb_use_okcar);
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_RNDIS, R.string.usb_use_tethering);
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_MIDI, R.string.usb_use_MIDI);
         FUNCTIONS_MAP.put(UsbManager.FUNCTION_PTP, R.string.usb_use_photo_transfers);

@@ -123,6 +123,8 @@ public class ConnectedUsbDeviceUpdater {
             case POWER_ROLE_SINK:
                 if (functions == UsbManager.FUNCTION_MTP) {
                     return R.string.usb_summary_file_transfers;
+                } else if (functions == UsbManager.FUNCTION_OKCAR) {
+                    return R.string.usb_summary_okcar;
                 } else if (functions == UsbManager.FUNCTION_RNDIS) {
                     return R.string.usb_summary_tether;
                 } else if (functions == UsbManager.FUNCTION_PTP) {
@@ -135,6 +137,8 @@ public class ConnectedUsbDeviceUpdater {
             case POWER_ROLE_SOURCE:
                 if (functions == UsbManager.FUNCTION_MTP) {
                     return R.string.usb_summary_file_transfers_power;
+                } else if (functions == UsbManager.FUNCTION_OKCAR) {
+                    return R.string.usb_summary_okcar;
                 } else if (functions == UsbManager.FUNCTION_RNDIS) {
                     return R.string.usb_summary_tether_power;
                 } else if (functions == UsbManager.FUNCTION_PTP) {
