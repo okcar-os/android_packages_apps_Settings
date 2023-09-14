@@ -136,10 +136,10 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         fontSizeController.setInteractionListener(previewController);
         controllers.add(fontSizeController);
 
-        final PreviewSizeSeekBarController displaySizeController = new PreviewSizeSeekBarController(
-                context, DISPLAY_SIZE_KEY, displaySizeData);
-        displaySizeController.setInteractionListener(previewController);
-        controllers.add(displaySizeController);
+        // final PreviewSizeSeekBarController displaySizeController = new PreviewSizeSeekBarController(
+        //         context, DISPLAY_SIZE_KEY, displaySizeData);
+        // displaySizeController.setInteractionListener(previewController);
+        // controllers.add(displaySizeController);
 
         mFontWeightAdjustmentController =
                 new FontWeightAdjustmentPreferenceController(context, BOLD_TEXT_KEY);

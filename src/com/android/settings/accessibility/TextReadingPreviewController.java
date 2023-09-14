@@ -94,6 +94,8 @@ class TextReadingPreviewController extends BasePreferenceController implements
 
         mFontSizePreference = screen.findPreference(FONT_SIZE_KEY);
         mDisplaySizePreference = screen.findPreference(DISPLAY_SIZE_KEY);
+        mDisplaySizePreference.setVisible(false);
+        
         Objects.requireNonNull(mFontSizePreference,
                 /* message= */ "Font size preference is null, the preview controller "
                         + "couldn't get the info");
