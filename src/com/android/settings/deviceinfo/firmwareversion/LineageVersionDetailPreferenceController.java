@@ -41,7 +41,7 @@ public class LineageVersionDetailPreferenceController extends BasePreferenceCont
     private static final int DELAY_TIMER_MILLIS = 500;
     private static final int ACTIVITY_TRIGGER_COUNT = 3;
 
-    private static final String KEY_LINEAGE_VERSION_PROP = "ro.lineage.display.version";
+    private static final String KEY_LINEAGE_VERSION_PROP = "ro.okcaros.display.version";
 
     private static final String PLATLOGO_PACKAGE_NAME = "org.lineageos.lineageparts";
     private static final String PLATLOGO_ACTIVITY_CLASS =
@@ -88,25 +88,32 @@ public class LineageVersionDetailPreferenceController extends BasePreferenceCont
         if (Utils.isMonkeyRunning()) {
             return false;
         }
-        arrayCopy();
-        mHits[mHits.length - 1] = SystemClock.uptimeMillis();
-        if (mHits[0] >= (SystemClock.uptimeMillis() - DELAY_TIMER_MILLIS)) {
-            if (mUserManager.hasUserRestriction(UserManager.DISALLOW_FUN)) {
-                if (mFunDisallowedAdmin != null && !mFunDisallowedBySystem) {
-                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext,
-                            mFunDisallowedAdmin);
-                }
-                Log.d(TAG, "Sorry, no fun for you!");
-                return true;
-            }
+        // arrayCopy();
+        // mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+        // if (mHits[0] >= (SystemClock.uptimeMillis() - DELAY_TIMER_MILLIS)) {
+        //     if (mUserManager.hasUserRestriction(UserManager.DISALLOW_FUN)) {
+        //         if (mFunDisallowedAdmin != null && !mFunDisallowedBySystem) {
+        //             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext,
+        //                     mFunDisallowedAdmin);
+        //         }
+        //         Log.d(TAG, "Sorry, no fun for you!");
+        //         return true;
+        //     }
 
-            final Intent intent = new Intent(Intent.ACTION_MAIN)
-                     .setClassName(PLATLOGO_PACKAGE_NAME, PLATLOGO_ACTIVITY_CLASS);
-            try {
-                mContext.startActivity(intent);
-            } catch (Exception e) {
-                Log.e(TAG, "Unable to start activity " + intent.toString());
-            }
+        //     final Intent intent = new Intent(Intent.ACTION_MAIN)
+        //              .setClassName(PLATLOGO_PACKAGE_NAME, PLATLOGO_ACTIVITY_CLASS);
+        //     try {
+        //         mContext.startActivity(intent);
+        //     } catch (Exception e) {
+        //         Log.e(TAG, "Unable to start activity " + intent.toString());
+        //     }
+        // }
+
+        final Intent intent = new Intent("android.settings.SYSTEM_UPDATE_SETTINGS");
+        try {
+            mContext.startActivity(intent);
+        } catch (Exception e) {
+            Log.e(TAG, "Unable to start activity " + intent.toString());
         }
         return true;
     }
