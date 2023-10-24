@@ -75,7 +75,7 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
