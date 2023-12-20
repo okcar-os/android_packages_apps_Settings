@@ -80,12 +80,14 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         initSeekBarPreference(LEFT_EDGE_SEEKBAR_KEY);
         initSeekBarPreference(RIGHT_EDGE_SEEKBAR_KEY);
 
-        boolean isTaskbarEnabled = LineageSettings.System.getInt(getContext().getContentResolver(),
-                LineageSettings.System.ENABLE_TASKBAR, 0) == 1;
-        if (isTaskbarEnabled) {
-            getPreferenceScreen().removePreference(
+        // boolean isTaskbarEnabled = LineageSettings.System.getInt(getContext().getContentResolver(),
+        //         LineageSettings.System.ENABLE_TASKBAR, 0) == 1;
+        // if (isTaskbarEnabled) {
+        //     getPreferenceScreen().removePreference(
+        //             getPreferenceScreen().findPreference(NAVIGATION_BAR_HINT_KEY));
+        // }
+        getPreferenceScreen().removePreference(
                     getPreferenceScreen().findPreference(NAVIGATION_BAR_HINT_KEY));
-        }
     }
 
     @Override
