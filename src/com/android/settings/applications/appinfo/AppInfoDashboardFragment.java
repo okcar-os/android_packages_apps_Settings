@@ -216,9 +216,16 @@ public class AppInfoDashboardFragment extends DashboardFragment
         alarmsAndReminders.setPackageName(packageName);
         alarmsAndReminders.setParentFragment(this);
 
-        use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
-                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles,
-                alarmsAndReminders));
+        final LongBackgroundTasksDetailsPreferenceController longBackgroundTasks =
+                use(LongBackgroundTasksDetailsPreferenceController.class);
+        longBackgroundTasks.setPackageName(packageName);
+        longBackgroundTasks.setParentFragment(this);
+
+        final AdvancedAppInfoPreferenceCategoryController advancedAppInfo =
+                use(AdvancedAppInfoPreferenceCategoryController.class);
+        advancedAppInfo.setChildren(Arrays.asList(writeSystemSettings, drawOverlay, pip,
+                externalSource, acrossProfiles, alarmsAndReminders, longBackgroundTasks));
+        advancedAppInfo.setAppEntry(mAppEntry);
 
         final AppLocalePreferenceController appLocale =
                 use(AppLocalePreferenceController.class);
@@ -431,7 +438,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    private static void showLockScreen(Context context, Runnable successRunnable) {
+    /** Shows the lock screen if the keyguard is secured. */
+    public static void showLockScreen(Context context, Runnable successRunnable) {
         final KeyguardManager keyguardManager = context.getSystemService(
                 KeyguardManager.class);
 
@@ -451,6 +459,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                     };
 
             final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
+                    .setUseDefaultSubtitle() // use default subtitle if subtitle is null/empty
                     .setUseDefaultTitle(); // use default title if title is null/empty
 
             final BiometricManager bm = context.getSystemService(BiometricManager.class);
@@ -634,6 +643,21 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 .launch();
     }
 
+    /** Starts app info fragment from SPA pages. */
+    public static void startAppInfoFragment(
+            Class<?> destination, ApplicationInfo app, Context context, int sourceMetricsCategory) {
+        // start new fragment to display extended information
+        Bundle args = new Bundle();
+        args.putString(ARG_PACKAGE_NAME, app.packageName);
+        args.putInt(ARG_PACKAGE_UID, app.uid);
+        new SubSettingLauncher(context)
+                .setDestination(destination.getName())
+                .setArguments(args)
+                .setUserHandle(UserHandle.getUserHandleForUid(app.uid))
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .launch();
+    }
+
     private void onPackageRemoved() {
         getActivity().finishActivity(SUB_INFO_FRAGMENT);
         getActivity().finishAndRemoveTask();
@@ -708,10 +732,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
             try {
                 mPackageInfo = activity.getPackageManager().getPackageInfo(
                         mAppEntry.info.packageName,
-                        PackageManager.MATCH_DISABLED_COMPONENTS |
-                                PackageManager.MATCH_ANY_USER |
-                                PackageManager.GET_SIGNATURES |
-                                PackageManager.GET_PERMISSIONS);
+                        PackageManager.PackageInfoFlags.of(
+                                PackageManager.MATCH_DISABLED_COMPONENTS
+                                        | PackageManager.MATCH_ANY_USER
+                                        | PackageManager.GET_SIGNATURES
+                                        | PackageManager.GET_PERMISSIONS
+                                        | PackageManager.MATCH_ARCHIVED_PACKAGES));
             } catch (NameNotFoundException e) {
                 Log.e(TAG, "Exception when retrieving package:" + mAppEntry.info.packageName, e);
             }

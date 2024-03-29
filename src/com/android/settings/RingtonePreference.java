@@ -311,9 +311,10 @@ public class RingtonePreference extends Preference {
                 return false;
             }
 
-            if (!userManager.isManagedProfile(profileUserId)) {
+            if (!(userManager.isManagedProfile(profileUserId) || userManager.getUserProperties(
+                    UserHandle.of(profileUserId)).isMediaSharedWithParent())) {
                 Log.e(TAG, "isValidRingtoneUri for URI:" + ringtoneUri
-                    + " failed: user " + profileUserId + " is not a managed profile");
+                    + " failed: user " + profileUserId + " is not a cloned or managed profile");
                 return false;
             }
         }

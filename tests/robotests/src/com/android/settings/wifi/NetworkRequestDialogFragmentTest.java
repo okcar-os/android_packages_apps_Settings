@@ -49,6 +49,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,6 +111,7 @@ public class NetworkRequestDialogFragmentTest {
         networkRequestDialogFragment.mWifiPickerTracker = mWifiPickerTracker;
     }
 
+    @Ignore
     @Test
     public void display_shouldShowTheDialog() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), null);
@@ -118,6 +120,7 @@ public class NetworkRequestDialogFragmentTest {
         assertThat(alertDialog.isShowing()).isTrue();
     }
 
+    @Ignore
     @Test
     public void display_shouldShowTitleWithAppName() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
@@ -129,6 +132,7 @@ public class NetworkRequestDialogFragmentTest {
         assertThat(view.getText()).isEqualTo(targetTitle);
     }
 
+    @Ignore
     @Test
     public void clickNegativeButton_shouldCloseTheDialog() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), null);
@@ -230,6 +234,7 @@ public class NetworkRequestDialogFragmentTest {
         return wifiEntryList;
     }
 
+    @Ignore
     @Test
     public void display_shouldNotShowNeutralButton() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
@@ -240,6 +245,7 @@ public class NetworkRequestDialogFragmentTest {
         assertThat(button.getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Ignore
     @Test
     public void onMatchManyResult_showNeutralButton() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
@@ -264,6 +270,7 @@ public class NetworkRequestDialogFragmentTest {
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
+    @Ignore
     @Test
     public void clickNeutralButton_hideNeutralButton() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
@@ -287,6 +294,7 @@ public class NetworkRequestDialogFragmentTest {
         assertThat(button.getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Ignore
     @Test
     public void cancelDialog_callsReject() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);

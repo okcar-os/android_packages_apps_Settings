@@ -194,7 +194,9 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
             logSpecialPermissionChange(allowlisted, accessPreference.getEntry().info.packageName);
             mDataSaverBackend.setIsAllowlisted(accessPreference.getEntry().info.uid,
                     accessPreference.getEntry().info.packageName, allowlisted);
-            accessPreference.getDataUsageState().isDataSaverAllowlisted = allowlisted;
+            if (accessPreference.getDataUsageState() != null) {
+                accessPreference.getDataUsageState().isDataSaverAllowlisted = allowlisted;
+            }
             return true;
         }
         return false;
@@ -231,7 +233,7 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
     void logSpecialPermissionChange(boolean allowlisted, String packageName) {
         final int logCategory = allowlisted ? SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_DENY;
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(mContext,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(mContext,
                 logCategory, packageName);
     }
 

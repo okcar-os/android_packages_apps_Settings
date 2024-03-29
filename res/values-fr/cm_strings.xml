@@ -24,15 +24,12 @@
     <string name="berry_black_theme_title">Noir pur</string>
     <string name="berry_black_theme_summary">Fond noir pur pour le thème sombre</string>
     <string name="lineagelicense_title">Infos légales LineageOS</string>
-    <string name="device_info_protected_single_press">Appuyez pour afficher les informations</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Vous êtes maintenant à <xliff:g id="step_count">%1$d</xliff:g> étape de l\'activation des paramètres de développement.
-Vous êtes maintenant à <xliff:g id="step_count">%1$d</xliff:g> étapes de l\'activation des paramètres de développement.</item>
-        <item quantity="other">Vous êtes maintenant à <xliff:g id="step_count">%1$d</xliff:g> étapes de l\'activation des paramètres de développement.</item>
-    </plurals>
+    <string name="show_dev_countdown_cm">{count, plural,
+      =1      {Vous êtes maintenant à # étape de l\'activation des paramètres de développement.}
+      other   {Vous êtes maintenant à # étapes de l\'activation des paramètres de développement.}
+    }</string>
     <string name="show_dev_on_cm">Vous avez activé les paramètres de développement !</string>
     <string name="show_dev_already_cm">Inutile, vous avez déjà activé les paramètres de développement.</string>
-    <string name="peak_refresh_rate_summary_custom">Augmente automatiquement le taux de rafraîchissement de 60 à %1$d Hz pour certains contenus. Accroît l\'utilisation de la batterie.</string>
     <string name="status_bar_double_tap_to_sleep_title">Appuyer pour mettre en veille</string>
     <string name="status_bar_double_tap_to_sleep_summary">Appuyer deux fois sur la barre d\'état ou sur l\'écran de verrouillage pour éteindre l\'écran</string>
     <string name="high_touch_polling_rate_title">Taux d\'échantillonnage tactile élevé</string>
@@ -43,10 +40,6 @@ Vous êtes maintenant à <xliff:g id="step_count">%1$d</xliff:g> étapes de l\'a
     <string name="high_touch_sensitivity_summary">Augmenter la sensibilité de l\'écran permettant ainsi le port de gants</string>
     <string name="tethering_allow_vpn_upstreams_title">Autoriser les clients à utiliser des VPNs</string>
     <string name="tethering_allow_vpn_upstreams_summary">Permettre aux clients de point d\'accès d\'utiliser les connexions VPN de cet appareil pour la connectivité en amont</string>
-    <string name="increasing_ring_volume_option_title">Sonnerie progressive</string>
-    <string name="increasing_ring_min_volume_title">Volume de démarrage</string>
-    <string name="increasing_ring_ramp_up_time_title">Durée de progression</string>
-    <string name="lockscreen_media_art_title">Afficher la couverture du média</string>
     <string name="lock_settings_picker_pattern_size_message">Choisissez une taille de modèle</string>
     <string name="lockpattern_settings_enable_error_path_title">Afficher l\'erreur de schéma</string>
     <string name="lockpattern_settings_enable_dots_title">Afficher les points du schéma</string>
@@ -70,6 +63,7 @@ Vous êtes maintenant à <xliff:g id="step_count">%1$d</xliff:g> étapes de l\'a
     <string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Touchez le capteur sur le côté de votre tablette.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="device">Touchez le capteur sur le côté de votre appareil.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Touchez le capteur sur le côté de votre téléphone.</string>
+    <string name="security_settings_require_screen_on_to_auth_with_proximity_description">Toucher le capteur pour déverrouiller, même lorsque l\'écran est éteint. Le capteur de proximité empêche un déverrouillage accidentel.</string>
     <string name="show_navbar_hint_title">Indice de navigation</string>
     <string name="show_navbar_hint_summary">Afficher l\'indice de navigation en bas de l\'écran</string>
     <string name="app_notification_sound_timeout_title">Temps minimum entre les sons de notification</string>
@@ -108,5 +102,6 @@ Vous êtes maintenant à <xliff:g id="step_count">%1$d</xliff:g> étapes de l\'a
     <string name="ambient_display_screen_off_udfps_title" product="device">Appui long sur le capteur d\'empreintes pour déverrouiller</string>
     <string name="ambient_display_screen_off_udfps_summary">Pour allumer votre écran et le déverrouiller, appuyez longuement sur votre lecteur d\'empreinte digitale sous l\'écran.</string>
     <string name="storage_warning_internal">Attention : Cette option peut ne pas fonctionner correctement ou entraîner une perte de données et n\'est donc pas recommandée !</string>
+    <string name="assisted_gps">Utiliser le GPS assisté</string>
     <string name="assisted_gps_summary">Télécharger les données d\'assistance par satellite à partir d\'Internet peut grandement améliorer les performances de démarrage du GPS. Pour les appels d\'urgence, le GPS assisté est toujours autorisé.</string>
 </resources>

@@ -31,6 +31,8 @@ import com.android.settings.widget.LabeledSeekBarPreference;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
 
+import static com.android.systemui.shared.recents.utilities.Utilities.isLargeScreen;
+
 import lineageos.providers.LineageSettings;
 
 /**

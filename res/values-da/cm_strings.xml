@@ -21,17 +21,9 @@
     <string name="adb_enable_summary_root">Tillad kørsel af Android fejlretning som \'root\'</string>
     <string name="backup_transport_setting_label">Skift backup udbyder</string>
     <string name="backup_transport_title">Vælg backup udbyder</string>
-    <string name="berry_black_theme_title">Ren sort</string>
-    <string name="berry_black_theme_summary">Ren sort baggrund til mørkt tema</string>
     <string name="lineagelicense_title">LineageOS-juridisk</string>
-    <string name="device_info_protected_single_press">Tryk for at vise info</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Du er nu <xliff:g id="step_count">%1$d</xliff:g> skridt fra at aktivere udvikler-indstillinger.</item>
-        <item quantity="other">Du er nu <xliff:g id="step_count">%1$d</xliff:g> skridt fra at aktivere udvikler-indstillinger.</item>
-    </plurals>
     <string name="show_dev_on_cm">Du har aktiveret udvikler-indstillinger!</string>
     <string name="show_dev_already_cm">Behøves ikke.; du har allerede aktiveret udvikler-indstillinger.</string>
-    <string name="peak_refresh_rate_summary_custom">Øger automatisk opdateringshastigheden fra 60 til %1$d Hz for noget indhold. Medfører højere batteriforbrug.</string>
     <string name="status_bar_double_tap_to_sleep_title">Tryk for at slumre</string>
     <string name="status_bar_double_tap_to_sleep_summary">Dobbelt-tryk på statusbjælken eller låseskærmen, for at slukke for skærmen</string>
     <string name="high_touch_polling_rate_title">Høj berøringsmåling rate</string>
@@ -41,11 +33,7 @@
     <string name="high_touch_sensitivity_title">Høj berøringsfølsomhed</string>
     <string name="high_touch_sensitivity_summary">Forøg berøringsfølsom skærms følsomhed, så den kan bruges med handsker på</string>
     <string name="tethering_allow_vpn_upstreams_title">Tillad klienter at bruge VPN\'er</string>
-    <string name="tethering_allow_vpn_upstreams_summary">Tillad hotspot klienter at bruge denne enhed\u2019s VPN-forbindelser til upstream forbindelse</string>
-    <string name="increasing_ring_volume_option_title">Stigende ringe-lydstyrke</string>
-    <string name="increasing_ring_min_volume_title">Start-lydstyrke</string>
-    <string name="increasing_ring_ramp_up_time_title">Opvarmningstid</string>
-    <string name="lockscreen_media_art_title">Vis medie-albumbilleder</string>
+    <string name="tethering_allow_vpn_upstreams_summary">Tillad hotspot-klienter at bruge denne enhed\u2019s VPN-forbindelser til upstream-forbindelse</string>
     <string name="lock_settings_picker_pattern_size_message">Vælg en mønsterstørrelse</string>
     <string name="lockpattern_settings_enable_error_path_title">Vis mønster-fejl</string>
     <string name="lockpattern_settings_enable_dots_title">Vis mønster-prikker</string>
@@ -106,6 +94,5 @@
     <string name="ambient_display_screen_off_udfps_title" product="tablet">Langt tryk på fingeraftrykssensoren for at låse tabletten op</string>
     <string name="ambient_display_screen_off_udfps_title" product="device">Langt tryk på fingeraftrykssensoren for at låse enheden op</string>
     <string name="ambient_display_screen_off_udfps_summary">For at vække skærmen og låse den op, skal du trykke lang tid på fingeraftrykssensoren under displayet.</string>
-    <string name="storage_warning_internal">Advarsel: Denne indstilling fungerer muligvis ikke korrekt eller fører til tab af data og anbefales derfor ikke!</string>
     <string name="assisted_gps_summary">Download satellit-hjælpedata fra internettet, som i høj grad kan forbedre GPS opstartsfunktionen. Til nødopkald er assisteret GPS altid tilladt.</string>
 </resources>

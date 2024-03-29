@@ -41,7 +41,6 @@ import com.android.settings.network.ProviderModelSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
-import com.android.settings.wifi.slice.ContextualWifiSlice;
 import com.android.settings.wifi.slice.WifiSlice;
 import com.android.settingslib.media.MediaOutputConstants;
 
@@ -82,15 +81,6 @@ public class CustomSliceRegistry {
             .appendPath("bluetooth_devices")
             .build();
 
-    /**
-     * Backing Uri for the Wifi Slice.
-     */
-    public static final Uri CONTEXTUAL_WIFI_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSlicesContract.AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("contextual_wifi")
-            .build();
     /**
      * Slice Uri for Enhanced 4G slice
      */
@@ -193,16 +183,6 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("media_volume")
-            .build();
-
-    /**
-     * Full {@link Uri} for the Ringer volume Slice. (Ring & notification combined)
-     */
-    public static final Uri VOLUME_RINGER_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("ring_volume")
             .build();
 
     /**
@@ -313,36 +293,26 @@ public class CustomSliceRegistry {
             .appendPath("always_on_display")
             .build();
 
-    /**
-     * Backing Uri for the Turn on Wi-Fi Slice.
-     */
-    public static final Uri TURN_ON_WIFI_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("turn_on_wifi")
-            .build();
-
     @VisibleForTesting
     static final Map<Uri, Class<? extends CustomSliceable>> sUriToSlice;
 
     static {
         sUriToSlice = new ArrayMap<>();
-
-        sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
-        sUriToSlice.put(CONTEXTUAL_ADAPTIVE_SLEEP_URI, ContextualAdaptiveSleepSlice.class);
-        sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
-        sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
         sUriToSlice.put(FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
         sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);
-        sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
         sUriToSlice.put(MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
         sUriToSlice.put(PROVIDER_MODEL_SLICE_URI, ProviderModelSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
-        sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
         sUriToSlice.put(ALWAYS_ON_SLICE_URI, AlwaysOnDisplaySlice.class);
+        sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
+        sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
+
+        // Slices for contextual card.
+        sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
+        sUriToSlice.put(CONTEXTUAL_ADAPTIVE_SLEEP_URI, ContextualAdaptiveSleepSlice.class);
+        sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
+        sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {

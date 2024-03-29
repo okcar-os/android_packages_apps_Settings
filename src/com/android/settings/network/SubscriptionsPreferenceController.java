@@ -19,6 +19,8 @@ package com.android.settings.network;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
+import static com.android.settings.network.MobileIconGroupExtKt.getSummaryForSub;
+import static com.android.settings.network.MobileIconGroupExtKt.maybeToHtml;
 import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
@@ -39,7 +41,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
-import android.text.Html;
 import android.util.ArraySet;
 import android.util.Log;
 
@@ -224,7 +225,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             return;
         }
 
-        SubscriptionInfo subInfo = mSubscriptionManager.getDefaultDataSubscriptionInfo();
+        // Prefer using the currently active sub
+        SubscriptionInfo subInfoCandidate = mSubscriptionManager.getActiveSubscriptionInfo(
+                SubscriptionManager.getActiveDataSubscriptionId());
+        SubscriptionInfo subInfo = mSubscriptionManager.isSubscriptionVisible(subInfoCandidate)
+                ? subInfoCandidate : mSubscriptionManager.getDefaultDataSubscriptionInfo();
         if (subInfo == null) {
             mPreferenceGroup.removeAll();
             return;
@@ -259,9 +264,16 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mUpdateListener.onChildrenUpdated();
     }
 
+    /**@return {@code true} if subId is the default data sub. **/
+    private boolean isDds(int subId) {
+        SubscriptionInfo info = mSubscriptionManager.getDefaultDataSubscriptionInfo();
+        return info != null && info.getSubscriptionId() == subId;
+    }
+
     private CharSequence getMobilePreferenceSummary(int subId) {
         final TelephonyManager tmForSubId = mTelephonyManager.createForSubscriptionId(subId);
-        if (!tmForSubId.isDataEnabled()) {
+        boolean isDds = isDds(subId);
+        if (!tmForSubId.isDataEnabled() && isDds) {
             return mContext.getString(R.string.mobile_data_off_summary);
         }
         final ServiceState serviceState = tmForSubId.getServiceState();
@@ -278,16 +290,19 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         String result = mSubsPrefCtrlInjector.getNetworkType(mContext, mConfig,
                 mTelephonyDisplayInfo, subId, isCarrierNetworkActive, mCarrierNetworkChangeMode);
         if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isCarrierNetworkActive) {
+            String connectionState = mContext.getString(isDds
+                    ? R.string.mobile_data_connection_active
+                    : R.string.mobile_data_temp_connection_active);
             if (result.isEmpty()) {
-                result = mContext.getString(R.string.mobile_data_connection_active);
+                return connectionState;
             } else {
-                result = mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.mobile_data_connection_active), result);
+                result = mContext.getString(
+                        R.string.preference_summary_default_combination, connectionState, result);
             }
         } else if (!isDataInService) {
-            result = mContext.getString(R.string.mobile_data_no_connection);
+            return mContext.getString(R.string.mobile_data_no_connection);
         }
-        return Html.fromHtml(result, Html.FROM_HTML_MODE_LEGACY);
+        return maybeToHtml(result);
     }
 
     @VisibleForTesting
@@ -320,9 +335,13 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final boolean isVoiceInService = (serviceState == null)
                 ? false
                 : (serviceState.getState() == ServiceState.STATE_IN_SERVICE);
+        final boolean isDataEnabled = tmForSubId.isDataEnabled()
+                // non-Dds but auto data switch feature is enabled
+                || (!isDds(subId) && tmForSubId.isMobileDataPolicyEnabled(
+                        TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH));
         if (isDataInService || isVoiceInService || isCarrierNetworkActive) {
-            icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels,
-                    !tmForSubId.isDataEnabled(), mCarrierNetworkChangeMode);
+            icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, !isDataEnabled,
+                    mCarrierNetworkChangeMode);
         }
 
         final boolean isActiveCellularNetwork =
@@ -337,23 +356,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     @VisibleForTesting
     boolean shouldInflateSignalStrength(int subId) {
         return SignalStrengthUtil.shouldInflateSignalStrength(mContext, subId);
-    }
-
-    @VisibleForTesting
-    void setIcon(Preference pref, int subId, boolean isDefaultForData) {
-        final TelephonyManager mgr = mContext.getSystemService(
-                TelephonyManager.class).createForSubscriptionId(subId);
-        final SignalStrength strength = mgr.getSignalStrength();
-        int level = (strength == null) ? 0 : strength.getLevel();
-        int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
-        if (shouldInflateSignalStrength(subId)) {
-            level += 1;
-            numLevels += 1;
-        }
-
-        final boolean showCutOut = !isDefaultForData || !mgr.isDataEnabled();
-        pref.setIcon(mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, showCutOut,
-                    mCarrierNetworkChangeMode));
     }
 
     /**
@@ -519,7 +521,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
          * Uses to inject function and value for class and test class.
          */
         public boolean canSubscriptionBeDisplayed(Context context, int subId) {
-            return (SubscriptionUtil.getAvailableSubscription(context,
+            return (SubscriptionUtil.getAvailableSubscriptionBySubIdAndShowingForUser(context,
                     ProxySubscriptionManager.getInstance(context), subId) != null);
         }
 
@@ -579,10 +581,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 return "";
             }
 
-            int resId = iconGroup.dataContentDescription;
-            return resId != 0
-                    ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId)
-                    : "";
+            return getSummaryForSub(iconGroup, context, subId);
         }
 
         /**

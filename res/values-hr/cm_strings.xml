@@ -18,24 +18,14 @@
     <string name="keyboard_extras_title">Dodatno</string>
     <string name="advanced_keyboard_settings_title">Napredne postavke</string>
     <string name="lineagelicense_title">LineageOS licenca</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Sada ste <xliff:g id="step_count">%1$d</xliff:g> korak od omogućavanja razvojnih postavki.</item>
-        <item quantity="few">Sada ste <xliff:g id="step_count">%1$d</xliff:g> koraka od omogućavanja razvojnih postavki.</item>
-        <item quantity="other">Sada ste <xliff:g id="step_count">%1$d</xliff:g> koraka od omogućavanja razvojnih postavki.</item>
-    </plurals>
     <string name="show_dev_on_cm">Omogućili ste razvojne postavke!</string>
     <string name="show_dev_already_cm">Nema potrebe, već ste omogućili postavke za razvoj.</string>
-    <string name="peak_refresh_rate_summary_custom">Automatski povećava učestalost osvježavanja sa 60 na %1$d Hz za određeni sadržaj. Povećava potrošnju baterije.</string>
     <string name="status_bar_double_tap_to_sleep_title">Dodir za spavanje</string>
     <string name="status_bar_double_tap_to_sleep_summary">Dvaput dodirnite traku statusa na zaključanom zaslonu za isključivanje zaslona</string>
     <string name="heads_up_notifications_enabled_title">Plutajuće obavijesti</string>
     <string name="heads_up_notifications_enabled_summary">Prikazuje prioritetne obavijesti u malim plutajućim prozorima</string>
     <string name="high_touch_sensitivity_title">Visoka osjetljivost na dodir</string>
     <string name="high_touch_sensitivity_summary">Povećaj osjetljivost na dodir tako da se mogu koristiti rukavice</string>
-    <string name="increasing_ring_volume_option_title">Pojačavanje glasnoće zvona</string>
-    <string name="increasing_ring_min_volume_title">Početna jačina zvuka</string>
-    <string name="increasing_ring_ramp_up_time_title">Vrijeme podizanja</string>
-    <string name="lockscreen_media_art_title">Prikaži omot medija</string>
     <string name="lock_settings_picker_pattern_size_message">Odaberite veličinu uzorka</string>
     <string name="lockpattern_settings_enable_error_path_title">Pokaži grešku uzorka</string>
     <string name="lockpattern_settings_enable_dots_title">Pokaži točke uzorka</string>

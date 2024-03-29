@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 
@@ -42,33 +43,57 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
 public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPreferenceFragment {
 
     @Override
+    public void addPreferencesFromResource(int preferencesResId) {
+        super.addPreferencesFromResource(preferencesResId);
+
+        adjustPreviewPaddingsForSetupWizard();
+    }
+
+    @VisibleForTesting
+    void adjustPreviewPaddingsForSetupWizard() {
+        TextReadingPreviewPreference textReadingPreviewPreference = findPreference(PREVIEW_KEY);
+        textReadingPreviewPreference.setLayoutMinHorizontalPadding(
+                getContext().getResources().getDimensionPixelSize(
+                        R.dimen.text_reading_preview_layout_padding_horizontal_min_suw));
+        textReadingPreviewPreference.setBackgroundMinHorizontalPadding(
+                getContext().getResources().getDimensionPixelSize(
+                        R.dimen.text_reading_preview_background_padding_horizontal_min_suw));
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-        final String title = getContext().getString(
-                R.string.accessibility_text_reading_options_title);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
-        icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
-        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
-                /* description= */ null, icon);
+        if (view instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            final String title = getContext().getString(
+                    R.string.accessibility_text_reading_options_title);
+            final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
+            icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
+            AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
+                    /* description= */ null, icon);
 
-        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
-        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
-            setResult(RESULT_CANCELED);
-            finish();
-        });
-        AccessibilitySetupWizardUtils.setSecondaryButton(getContext(), mixin,
-                R.string.accessibility_text_reading_reset_button_title,
-                () -> showDialog(DIALOG_RESET_SETTINGS)
-        );
+            final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+            AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,
+                    () -> {
+                        setResult(RESULT_CANCELED);
+                        finish();
+                    });
+            AccessibilitySetupWizardUtils.setSecondaryButton(getContext(), mixin,
+                    R.string.accessibility_text_reading_reset_button_title,
+                    () -> showDialog(DIALOG_RESET_SETTINGS)
+            );
+        }
     }
 
     @Override
     public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
             Bundle savedInstanceState) {
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-        return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        if (parent instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        }
+        return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
     @Override

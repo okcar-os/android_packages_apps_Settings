@@ -24,18 +24,8 @@
     <string name="berry_black_theme_title">Du pur</string>
     <string name="berry_black_theme_summary">Cefndir du pur i\'r thema dywyll</string>
     <string name="lineagelicense_title">Cyfreithiol LineageOS</string>
-    <string name="device_info_protected_single_press">Tapio i ddangos gwybodaeth</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="zero">Rwyt nawr <xliff:g id="step_count">%1$d</xliff:g> camau i ffwrdd o alluogi gosodiadau datblygu.</item>
-        <item quantity="one">Rwyt nawr <xliff:g id="step_count">%1$d</xliff:g> cam i ffwrdd o alluogi gosodiadau datblygu.</item>
-        <item quantity="two">Rwyt nawr <xliff:g id="step_count">%1$d</xliff:g> gam i ffwrdd o alluogi gosodiadau datblygu.</item>
-        <item quantity="few">Rwyt nawr <xliff:g id="step_count">%1$d</xliff:g> cam i ffwrdd o alluogi gosodiadau datblygu.</item>
-        <item quantity="many">Rwyt nawr <xliff:g id="step_count">%1$d</xliff:g> cham i ffwrdd o alluogi gosodiadau datblygu.</item>
-        <item quantity="other">Rwyt nawr <xliff:g id="step_count">%1$d</xliff:g> cam i ffwrdd o alluogi gosodiadau datblygu.</item>
-    </plurals>
     <string name="show_dev_on_cm">Rwyt wedi galluogi gosodiadau datblygu!</string>
     <string name="show_dev_already_cm">Dim angen; rwyt eisoes wedi galluogi gosodiadau datblygu.</string>
-    <string name="peak_refresh_rate_summary_custom">Mae\'n codi\'r gyfradd adnewyddu yn awtomatig o 60 i %1$d Hz ar gyfer rhai cynnwys. Mae\'n defnyddio mwy o fatri.</string>
     <string name="status_bar_double_tap_to_sleep_title">Tapio i gysgu</string>
     <string name="status_bar_double_tap_to_sleep_summary">Tapio dwywaith ar y bar statws neu\'r sgrin cloi i droi\'r sgrin i ffwrdd</string>
     <string name="high_touch_polling_rate_title">Cyfradd polio cyffyrddiad uchel</string>
@@ -46,10 +36,6 @@
     <string name="high_touch_sensitivity_summary">Cynyddu sensitifrwydd y sgrin gyffwrdd fel y gellir ei defnyddio wrth wisgo menig</string>
     <string name="tethering_allow_vpn_upstreams_title">Caniatáu cleientiaid i ddefnyddio VPNau</string>
     <string name="tethering_allow_vpn_upstreams_summary">Caniatáu cleientiaid llecynnau Wi-Fi i ddefnyddio cysylltiadau VPN y ddyfais hon</string>
-    <string name="increasing_ring_volume_option_title">Uchder sain yn cynyddu</string>
-    <string name="increasing_ring_min_volume_title">Uchder sain i ddechrau</string>
-    <string name="increasing_ring_ramp_up_time_title">Amser i gynyddu</string>
-    <string name="lockscreen_media_art_title">Dangos llun clawr cyfryngau</string>
     <string name="lock_settings_picker_pattern_size_message">Dewisa faint patrwm</string>
     <string name="lockpattern_settings_enable_error_path_title">Dangos gwall patrwm</string>
     <string name="lockpattern_settings_enable_dots_title">Dangos dotiau patrwm</string>

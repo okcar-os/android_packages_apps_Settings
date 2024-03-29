@@ -24,15 +24,13 @@
     <string name="berry_black_theme_title">Negru pur</string>
     <string name="berry_black_theme_summary">Fundal negru pur pentru tema întunecată</string>
     <string name="lineagelicense_title">Juridic LineageOS</string>
-    <string name="device_info_protected_single_press">Atingeți pentru a afișa informații</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Ești la <xliff:g id="step_count">%1$d</xliff:g> pas distanță de a activa opțiunile de dezvoltator.</item>
-        <item quantity="few">Ești la <xliff:g id="step_count">%1$d</xliff:g> pași distanță de a activa opțiunile de dezvoltator.</item>
-        <item quantity="other">Ești la <xliff:g id="step_count">%1$d</xliff:g> pași distanță de a activa opțiunile de dezvoltator.</item>
-    </plurals>
+    <string name="show_dev_countdown_cm">{count, plural,
+      one {}
+      few {Mai aveți # pași pentru a activa setările dezvoltator.}=1      {Mai aveți # pas pentru a activa setările dezvoltator.}
+      other   {Mai aveți # pași pentru a activa setările dezvoltator.}
+    }</string>
     <string name="show_dev_on_cm">Ați deblocat setările de dezvoltator!</string>
     <string name="show_dev_already_cm">Nu este nevoie, deja ai deblocat setările de dezvoltator.</string>
-    <string name="peak_refresh_rate_summary_custom">Crește automat rata de împrospătare de la 60 la %1$d Hz pentru anumite conținuturi. Crește consumul bateriei.</string>
     <string name="status_bar_double_tap_to_sleep_title">Atingeți pentru sleep</string>
     <string name="status_bar_double_tap_to_sleep_summary">Atingeți de două ori bara de stare sau ecranul de blocare pentru a opri ecranul</string>
     <string name="high_touch_polling_rate_title">Rată mare pentru touch polling</string>
@@ -43,10 +41,6 @@
     <string name="high_touch_sensitivity_summary">Crește sensibilitatea ecranului tactil, astfel încât acesta poate fi utilizat în timp ce se poartă mănuși</string>
     <string name="tethering_allow_vpn_upstreams_title">Permite clienților să utilizeze VPN-uri</string>
     <string name="tethering_allow_vpn_upstreams_summary">Permite clienților hotspot-ului să utilizeze conexiunile VPN ale acestui dispozitiv pentru conexiunea upstream</string>
-    <string name="increasing_ring_volume_option_title">Volum crescător</string>
-    <string name="increasing_ring_min_volume_title">Volum inițial</string>
-    <string name="increasing_ring_ramp_up_time_title">Timp de creştere a volumului</string>
-    <string name="lockscreen_media_art_title">Afișează coperta artistică a piesei</string>
     <string name="lock_settings_picker_pattern_size_message">Alegeți dimensiunea modelului</string>
     <string name="lockpattern_settings_enable_error_path_title">Afișare eroare model</string>
     <string name="lockpattern_settings_enable_dots_title">Afișare puncte model</string>
@@ -70,6 +64,7 @@
     <string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Atingeţi senzorul de pe partea laterală a tabletei.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="device">Atingeţi senzorul de pe partea laterală a dispozitivului.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Atingeţi senzorul de pe partea laterală a telefonului.</string>
+    <string name="security_settings_require_screen_on_to_auth_with_proximity_description">Atingeți senzorul pentru deblocare, chiar și atunci când ecranul este oprit. Senzorul de proximitate previne deblocarea accidentală.</string>
     <string name="show_navbar_hint_title">Indicii navigare</string>
     <string name="show_navbar_hint_summary">Arată indiciul bării de navigare în partea de jos a ecranului</string>
     <string name="app_notification_sound_timeout_title">Timp minim între sunetele notificărilor</string>
@@ -108,5 +103,6 @@
     <string name="ambient_display_screen_off_udfps_title" product="device">Apăsați lung pe senzorul de amprentă pentru a debloca dispozitivul</string>
     <string name="ambient_display_screen_off_udfps_summary">Pentru a porni și debloca ecranul, țineți apăsat pe senzorul de amprentă under-display.</string>
     <string name="storage_warning_internal">Atenție: Este posibil ca această opțiune să nu funcționeze corespunzător sau să ducă la pierderea datelor și, prin urmare, nu este recomandată!</string>
+    <string name="assisted_gps">Utilizați GPS asistat</string>
     <string name="assisted_gps_summary">Descarcă datele de asistență prin satelit de pe internet, care pot îmbunătăți considerabil performanța de pornire a GPS-ului. Pentru apelurile de urgență, GPS-ul asistat este întotdeauna permis.</string>
 </resources>

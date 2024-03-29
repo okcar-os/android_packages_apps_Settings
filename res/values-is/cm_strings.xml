@@ -24,14 +24,12 @@
     <string name="berry_black_theme_title">Hreint svart</string>
     <string name="berry_black_theme_summary">Hreinn svartur bakgrunnur í dökku þema</string>
     <string name="lineagelicense_title">Lagalegir fyrirvarar LineageOS</string>
-    <string name="device_info_protected_single_press">Ýttu til þess að birta upplýsingar</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Þú ert núna <xliff:g id="step_count">%1$d</xliff:g> skref frá því að virkja þróunarstillingar.</item>
-        <item quantity="other">Þú ert núna <xliff:g id="step_count">%1$d</xliff:g> skrefum frá því að virkja þróunarstillingar.</item>
-    </plurals>
+    <string name="show_dev_countdown_cm">{count, plural,
+      =1      {Þú ert núna # skref frá því að virkja þróunarstillingar.}
+      other   {Þú ert núna # skref frá því að virkja þróunarstillingar.}
+    }</string>
     <string name="show_dev_on_cm">Þú hefur virkjað þróunarstillingar!</string>
     <string name="show_dev_already_cm">Ekki nauðsynlegt, þú hefur þegar virkjað þróunarstillingar.</string>
-    <string name="peak_refresh_rate_summary_custom">Breytir endurnýjunarhraða sjálfkrafa úr 60 í %1$d Hz fyrir sumt efni. Eykur rafhlöðunotkun.</string>
     <string name="status_bar_double_tap_to_sleep_title">Ýttu til að svæfa</string>
     <string name="status_bar_double_tap_to_sleep_summary">Tvíbankaðu á stöðustikuna eða læsiskjáinn til að slökkva á skjánum</string>
     <string name="high_touch_polling_rate_title">Mikil tíðni snertinæmni</string>
@@ -42,10 +40,6 @@
     <string name="high_touch_sensitivity_summary">Auka næmni snertiskjás svo hægt sé að nota hann íklæddur vettlingum</string>
     <string name="tethering_allow_vpn_upstreams_title">Leyfa forritum að nota VPN-tengingar</string>
     <string name="tethering_allow_vpn_upstreams_summary">Leyfa tengipunktsforritum að nota VPN-tengingar tækisins til að tengjast út (upstream)</string>
-    <string name="increasing_ring_volume_option_title">Eyk hljóðstyrk hringingar</string>
-    <string name="increasing_ring_min_volume_title">Upphafshljóðstyrkur</string>
-    <string name="increasing_ring_ramp_up_time_title">Stigmögnunartími</string>
-    <string name="lockscreen_media_art_title">Sýna umslagsmyndir margmiðlunarefnis</string>
     <string name="lock_settings_picker_pattern_size_message">Veldu stærð mynsturs</string>
     <string name="lockpattern_settings_enable_error_path_title">Birta villu í mynstri</string>
     <string name="lockpattern_settings_enable_dots_title">Sýna mynsturpunkta</string>
@@ -69,6 +63,7 @@
     <string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Snertu lesarann á hlið spjaldtölvunnar.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="device">Snertu lesarann á hlið tækisins.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Snertu lesarann á hlið símans.</string>
+    <string name="security_settings_require_screen_on_to_auth_with_proximity_description">Snertu skynjarann til að aflæsa, jafnvel þegar slökkt er á skjá. Nálægðarskynjari kemur í veg fyrir aflæsingu fyrir slysni.</string>
     <string name="show_navbar_hint_title">Ábending við flakk</string>
     <string name="show_navbar_hint_summary">Birta stiku með ábendingum um flakk neðst á skjánum</string>
     <string name="app_notification_sound_timeout_title">Lágmarkstími milli tilkynningahljóða</string>
@@ -108,5 +103,6 @@
     <string name="ambient_display_screen_off_udfps_title" product="device">Ýttu lengi á fingrafaraskanna til að taka tækið úr lás</string>
     <string name="ambient_display_screen_off_udfps_summary">Til að vekja skjáinn og aflæsa, skaltu ýta lengi á fingrafaraskannann undir skjánum.</string>
     <string name="storage_warning_internal">Aðvörun: Þessi valkostur gæti virkað ekki sem skyldi eða gæti leitt til gagnataps og er því ekki mælt með að þetta sé notað!</string>
+    <string name="assisted_gps">Nota GPS með stuðningi</string>
     <string name="assisted_gps_summary">Sæktu gögn af netinu fyrir stuðning við gervihnattastaðsetningu sem geta bætt verulega afköst í ræsingu á GPS-tækjum. Í neyðarsímtölum er stuðningur við GPS alltaf leyfður.</string>
 </resources>

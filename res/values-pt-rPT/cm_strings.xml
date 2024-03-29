@@ -24,14 +24,8 @@
     <string name="berry_black_theme_title">Preto puro</string>
     <string name="berry_black_theme_summary">Fundo em preto puro para tema escuro</string>
     <string name="lineagelicense_title">Licença LineageOS</string>
-    <string name="device_info_protected_single_press">Toque para mostrar informações</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Está agora a <xliff:g id="step_count">%1$d</xliff:g> passo de ativar as opções de programador.</item>
-        <item quantity="other">Está agora a <xliff:g id="step_count">%1$d</xliff:g> passos de ativar as opções de programador.</item>
-    </plurals>
     <string name="show_dev_on_cm">Ativou as opções de programador!</string>
     <string name="show_dev_already_cm">Não é necessário, já ativou as opções de programador.</string>
-    <string name="peak_refresh_rate_summary_custom">Aumenta automaticamente a taxa de atualização de 60 para %1$d Hz em certos conteúdos. Aumenta a utilização da bateria.</string>
     <string name="status_bar_double_tap_to_sleep_title">Toque duplo para desligar o ecrã</string>
     <string name="status_bar_double_tap_to_sleep_summary">Dê um toque duplo na barra de estado ou ecrã de bloqueio para desligar o ecrã</string>
     <string name="high_touch_polling_rate_title">Alta taxa de amostragem de toque</string>
@@ -42,10 +36,6 @@
     <string name="high_touch_sensitivity_summary">Aumentar a sensibilidade do ecrã para ser manuseado quando estiver a usar luvas</string>
     <string name="tethering_allow_vpn_upstreams_title">Permitir que os clientes usem VPNs</string>
     <string name="tethering_allow_vpn_upstreams_summary">Permitir que os clientes de hotspot usem as ligações VPN deste dispositivo</string>
-    <string name="increasing_ring_volume_option_title">Toque crescente</string>
-    <string name="increasing_ring_min_volume_title">Volume inicial</string>
-    <string name="increasing_ring_ramp_up_time_title">Intervalo de aumento</string>
-    <string name="lockscreen_media_art_title">Mostrar capa do álbum</string>
     <string name="lock_settings_picker_pattern_size_message">Escolha um tamanho para o padrão</string>
     <string name="lockpattern_settings_enable_error_path_title">Mostrar erro no padrão</string>
     <string name="lockpattern_settings_enable_dots_title">Mostrar os pontos do padrão</string>

@@ -31,7 +31,6 @@ import android.provider.DeviceConfig;
 import android.service.notification.NotificationListenerService;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
@@ -83,9 +82,6 @@ public class RingVolumePreferenceControllerTest {
         when(mContext.getResources()).thenReturn(mResources);
         mController = new RingVolumePreferenceController(mContext);
         mController.setAudioHelper(mHelper);
-
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "false", false);
     }
 
     @Test
@@ -94,27 +90,6 @@ public class RingVolumePreferenceControllerTest {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
-    }
-
-    /**
-     * Devices that are not voice capable should still show Ring volume, because it is used by apps
-     * that make calls outside the cell network.
-     */
-    @Test
-    public void isAvailable_notSingleVolume_notVoiceCapable_shouldReturnTrue() {
-        when(mHelper.isSingleVolume()).thenReturn(false);
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_notSingleVolume_VoiceCapable_shouldReturnTrue() {
-
-        when(mHelper.isSingleVolume()).thenReturn(false);
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-
-        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
@@ -139,10 +114,6 @@ public class RingVolumePreferenceControllerTest {
      */
     @Test
     public void ringNotificationStreamsSeparate_controllerIsNotAvailable() {
-
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "true", false);
-
         final RingVolumePreferenceController controller =
                 new RingVolumePreferenceController(mContext);
 
@@ -153,58 +124,19 @@ public class RingVolumePreferenceControllerTest {
     }
 
     @Test
-    public void setHintsRing_aliased_Matches() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "false", false);
-
-
+    public void setHintsRing_Matches() {
         assertThat(mController.hintsMatch(
                 NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS)).isTrue();
     }
 
     @Test
-    public void setHintsRingNotification_aliased_Matches() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "false", false);
-
+    public void setHintsRingNotification_Matches() {
         assertThat(mController.hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_EFFECTS))
                 .isTrue();
     }
 
     @Test
-    public void setHintNotification_aliased_Matches() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "false", false);
-
-
-        assertThat(mController
-                .hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS))
-                .isTrue();
-    }
-
-    @Test
-    public void setHintsRing_unaliased_Matches() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "true", false);
-
-        assertThat(mController.hintsMatch(
-                NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS)).isTrue();
-    }
-
-    @Test
-    public void setHintsRingNotification_unaliased_Matches() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "true", false);
-
-        assertThat(mController.hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_EFFECTS))
-                .isTrue();
-    }
-
-    @Test
-    public void setHintNotification_unaliased_doesNotMatch() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "true", false);
-
+    public void setHintNotification_doesNotMatch() {
         assertThat(mController
                 .hintsMatch(NotificationListenerService.HINT_HOST_DISABLE_NOTIFICATION_EFFECTS))
                 .isFalse();

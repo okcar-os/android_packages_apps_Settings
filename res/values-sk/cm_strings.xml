@@ -24,15 +24,8 @@
     <string name="berry_black_theme_title">Čistá čierna</string>
     <string name="berry_black_theme_summary">Čisto čierne pozadie pre tmavú tému vzhľadu</string>
     <string name="lineagelicense_title">Právne informácie LineageOS</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Teraz ste <xliff:g id="step_count">%1$d</xliff:g> krok od povolenia možnosti pre vývojárov.</item>
-        <item quantity="few">Teraz ste <xliff:g id="step_count">%1$d</xliff:g> kroky od povolenia možnosti pre vývojárov.</item>
-        <item quantity="many">Teraz ste <xliff:g id="step_count">%1$d</xliff:g> krokov od povolenia možnosti pre vývojárov.</item>
-        <item quantity="other">Teraz ste <xliff:g id="step_count">%1$d</xliff:g> krokov od povolenia možnosti pre vývojárov.</item>
-    </plurals>
     <string name="show_dev_on_cm">Povolili ste možnosti pre vývojárov!</string>
     <string name="show_dev_already_cm">Netreba, už ste povolili možnosti pre vývojárov.</string>
-    <string name="peak_refresh_rate_summary_custom">Automaticky zvyšuje frekvenciu obnovenia zo 60 na %1$d Hz pre určitý obsah. Zvýši sa spotreba batérie.</string>
     <string name="status_bar_double_tap_to_sleep_title">Kliknutím uspať</string>
     <string name="status_bar_double_tap_to_sleep_summary">Vypnúť obrazovku dvojklikom na stavový riadok alebo na obrazovku uzamknutia</string>
     <string name="heads_up_notifications_enabled_title">Plávajúce upozornenia</string>
@@ -41,10 +34,6 @@
     <string name="high_touch_sensitivity_summary">Zvýšiť citlivosť dotykovej obrazovky, takže ju bude možné používať pri nosení rukavíc</string>
     <string name="tethering_allow_vpn_upstreams_title">Povoliť klientom používanie sietí VPN</string>
     <string name="tethering_allow_vpn_upstreams_summary">Povoliť hotspot klientom pripojenie cez VPN</string>
-    <string name="increasing_ring_volume_option_title">Zvyšovanie hlasitosti zvonenia</string>
-    <string name="increasing_ring_min_volume_title">Počiatočná hlasitosť</string>
-    <string name="increasing_ring_ramp_up_time_title">Doba zvyšovania</string>
-    <string name="lockscreen_media_art_title">Zobraziť obal médií</string>
     <string name="lock_settings_picker_pattern_size_message">Zvoliť veľkosť vzoru</string>
     <string name="lockpattern_settings_enable_error_path_title">Zobraziť chybu vzoru</string>
     <string name="lockpattern_settings_enable_dots_title">Zobraziť body vzoru</string>

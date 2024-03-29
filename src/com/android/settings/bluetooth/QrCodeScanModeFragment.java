@@ -16,9 +16,10 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Outline;
 import android.graphics.Rect;
@@ -26,6 +27,8 @@ import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -39,11 +42,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settingslib.R;
 import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.qrcode.QrCamera;
+
+import java.time.Duration;
 
 public class QrCodeScanModeFragment extends InstrumentedFragment implements
         TextureView.SurfaceTextureListener,
@@ -61,27 +66,22 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
     private static final long SHOW_ERROR_MESSAGE_INTERVAL = 10000;
     private static final long SHOW_SUCCESS_SQUARE_INTERVAL = 1000;
 
-    private boolean mIsGroupOp;
+    private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
+
+    public static final String KEY_BROADCAST_METADATA = "key_broadcast_metadata";
+
     private int mCornerRadius;
-    private BluetoothDevice mSink;
     private String mBroadcastMetadata;
     private Context mContext;
     private QrCamera mCamera;
-    private QrCodeScanModeController mController;
     private TextureView mTextureView;
     private TextView mSummary;
     private TextView mErrorMessage;
-
-    public QrCodeScanModeFragment(boolean isGroupOp, BluetoothDevice sink) {
-        mIsGroupOp = isGroupOp;
-        mSink = sink;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getContext();
-        mController = new QrCodeScanModeController(mContext);
     }
 
     @Override
@@ -209,15 +209,38 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
                     break;
 
                 case MESSAGE_SCAN_BROADCAST_SUCCESS:
-                    mController.addSource(mSink, mBroadcastMetadata, mIsGroupOp);
-                    updateSummary();
-                    mSummary.sendAccessibilityEvent(
-                            AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+                    Log.d(TAG, "scan success");
+                    final Intent resultIntent = new Intent();
+                    resultIntent.putExtra(KEY_BROADCAST_METADATA, mBroadcastMetadata);
+                    getActivity().setResult(Activity.RESULT_OK, resultIntent);
+                    notifyUserForQrCodeRecognition();
                     break;
                 default:
             }
         }
     };
+
+    private void notifyUserForQrCodeRecognition() {
+        if (mCamera != null) {
+            mCamera.stop();
+        }
+
+        mErrorMessage.setVisibility(View.INVISIBLE);
+
+        triggerVibrationForQrCodeRecognition(getContext());
+
+        getActivity().finish();
+    }
+
+    private static void triggerVibrationForQrCodeRecognition(Context context) {
+        Vibrator vibrator = context.getSystemService(Vibrator.class);
+        if (vibrator == null) {
+            return;
+        }
+        vibrator.vibrate(VibrationEffect.createOneShot(
+                VIBRATE_DURATION_QR_CODE_RECOGNITION.toMillis(),
+                VibrationEffect.DEFAULT_AMPLITUDE));
+    }
 
     private void showErrorMessage(@StringRes int messageResId) {
         final Message message = mHandler.obtainMessage(MESSAGE_SHOW_ERROR_MESSAGE,

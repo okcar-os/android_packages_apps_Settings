@@ -22,12 +22,8 @@
     <string name="berry_black_theme_title">ดำสนิท</string>
     <string name="berry_black_theme_summary">พื้นหลังสีดำสนิทสำหรับธีมมืด</string>
     <string name="lineagelicense_title">เกี่ยวกับกฎหมาย LineageOS</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="other">คุณเหลืออีก <xliff:g id="step_count">%1$d</xliff:g> ขั้นก่อนจะสามารถเปิดใช้งานการตั้งค่าการพัฒนา</item>
-    </plurals>
     <string name="show_dev_on_cm">คุณเปิดใช้งานการตั้งค่าการพัฒนาแล้ว!</string>
     <string name="show_dev_already_cm">ไม่จำเป็น คุณได้เปิดใช้งานการตั้งค่าการพัฒนาแล้ว</string>
-    <string name="peak_refresh_rate_summary_custom">เพิ่มอัตราการรีเฟรชจาก 60 เป็น %1$d Hz โดยอัตโนมัติสำหรับเนื้อหาบางรายการ เพิ่มการใช้งานแบตเตอรี่</string>
     <string name="status_bar_double_tap_to_sleep_title">แตะเพื่อหลับ</string>
     <string name="status_bar_double_tap_to_sleep_summary">แตะสองครั้งที่แถบสถานะเพื่อพักหน้าจอ</string>
     <string name="heads_up_notifications_enabled_title">การแจ้งเตือนด้านบน</string>
@@ -35,10 +31,6 @@
     <string name="high_touch_sensitivity_summary">เพิ่มความไวของหน้าจอสัมผัสเพื่อสามารถใช้ขณะสวมถุงมือ</string>
     <string name="tethering_allow_vpn_upstreams_title">อนุญาตให้ไคลเอ็นต์ใช้ VPN</string>
     <string name="tethering_allow_vpn_upstreams_summary">อนุญาตให้ไคลเอ็นต์ฮอตสปอตเชื่อมต่อ VPN ของอุปกรณ์นี้ สำหรับการเชื่อมต่ออัปสตรีม</string>
-    <string name="increasing_ring_volume_option_title">การเพิ่มเสียงเรียกเข้า</string>
-    <string name="increasing_ring_min_volume_title">ระดับเสียงเริ่มต้น</string>
-    <string name="increasing_ring_ramp_up_time_title">ระยะเวลาที่ดังเพิ่มขึ้น</string>
-    <string name="lockscreen_media_art_title">แสดงหน้าปกสื่อ</string>
     <string name="lock_settings_picker_pattern_size_message">เลือกขนาดรูปแบบ</string>
     <string name="lockpattern_settings_enable_error_path_title">แสดงลายเส้นที่ผิดพลาด</string>
     <string name="lockpattern_settings_enable_dots_title">แสดงจุดที่ลากผ่าน</string>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The LineageOS Project
+ * Copyright (C) 2018-2024 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import android.os.UserManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -57,7 +57,7 @@ public class AdbRootPreferenceController extends DeveloperOptionsPreferenceContr
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        ((SwitchPreference) mPreference).setChecked(mADBRootService.getEnabled());
+        ((SwitchPreferenceCompat) mPreference).setChecked(mADBRootService.getEnabled());
 
         if (!isAdminUser()) {
             mPreference.setEnabled(false);
@@ -69,6 +69,14 @@ public class AdbRootPreferenceController extends DeveloperOptionsPreferenceContr
         final boolean rootEnabled = (Boolean) newValue;
         mADBRootService.setEnabled(rootEnabled);
         return true;
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
+
+        mADBRootService.setEnabled(false);
+        ((SwitchPreferenceCompat) mPreference).setChecked(false);
     }
 
     @Override

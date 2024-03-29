@@ -24,13 +24,12 @@
     <string name="berry_black_theme_title">Đen tuyền</string>
     <string name="berry_black_theme_summary">Nền đen tuyền cho chủ đề tối</string>
     <string name="lineagelicense_title">Bộ phận pháp chế của LineageOS</string>
-    <string name="device_info_protected_single_press">Chạm để hiển thị thông tin</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="other">Hiện tại bạn còn <xliff:g id="step_count">%1$d</xliff:g> bước nữa để bật cài đặt nhà phát triển.</item>
-    </plurals>
+    <string name="show_dev_countdown_cm">{count, plural,
+      =1      {Hiện tại bạn đang cách # bước nữa để bật cài đặt nhà phát triển.}
+      other   {Hiện tại bạn đang cách # bước nữa để bật cài đặt nhà phát triển.}
+    }</string>
     <string name="show_dev_on_cm">Bạn đã bật cài đặt nhà phát triển!</string>
     <string name="show_dev_already_cm">Không cần thiết, bạn đã bật cài đặt nhà phát triển.</string>
-    <string name="peak_refresh_rate_summary_custom">Tự động tăng tốc độ làm mới từ 60 lên %1$d Hz đối với một số nội dung. Làm tăng mức sử dụng pin.</string>
     <string name="status_bar_double_tap_to_sleep_title">Chạm để tắt màn hình</string>
     <string name="status_bar_double_tap_to_sleep_summary">Chạm hai lần vào thanh trạng thái hoặc màn hình khoá để tắt màn hình</string>
     <string name="high_touch_polling_rate_title">Tỷ lệ làm mới cảm ứng cao</string>
@@ -41,10 +40,6 @@
     <string name="high_touch_sensitivity_summary">Tăng độ nhạy màn hình cảm ứng để nó có thể được sử dụng trong khi đeo găng tay</string>
     <string name="tethering_allow_vpn_upstreams_title">Cho phép máy khách sử dụng VPN</string>
     <string name="tethering_allow_vpn_upstreams_summary">Cho phép hotspot các máy khách sử dụng các kết nối VPN của thiết bị\u2019 này để kết nối đến máy chủ</string>
-    <string name="increasing_ring_volume_option_title">Tăng âm lượng chuông</string>
-    <string name="increasing_ring_min_volume_title">Âm lượng khởi động</string>
-    <string name="increasing_ring_ramp_up_time_title">Thời gian tăng</string>
-    <string name="lockscreen_media_art_title">Hiển thị ảnh bìa phương tiện</string>
     <string name="lock_settings_picker_pattern_size_message">Chọn một kích cỡ mẫu hình</string>
     <string name="lockpattern_settings_enable_error_path_title">Hiện lỗi mẫu hình</string>
     <string name="lockpattern_settings_enable_dots_title">Hiện dấu chấm mẫu hình</string>
@@ -68,6 +63,7 @@
     <string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Chạm vào cảm biến ở mặt bên máy tính bảng của bạn.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="device">Chạm vào cảm biến ở bên cạnh thiết bị của bạn.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Chạm vào cảm biến ở mặt bên điện thoại của bạn.</string>
+    <string name="security_settings_require_screen_on_to_auth_with_proximity_description">Chạm vào cảm biến để mở khóa, ngay cả khi màn hình tắt. Cảm biến tiệm cận ngăn ngừa việc vô tình mở khóa.</string>
     <string name="show_navbar_hint_title">Gợi ý điều hướng</string>
     <string name="show_navbar_hint_summary">Hiển thị thanh gợi ý điều hướng ở cuối màn hình</string>
     <string name="app_notification_sound_timeout_title">Thời gian tối thiểu giữa các âm thanh thông báo</string>
@@ -106,5 +102,6 @@
     <string name="ambient_display_screen_off_udfps_title" product="device">Giữ cảm biến vân tay để mở khóa thiết bị</string>
     <string name="ambient_display_screen_off_udfps_summary">Để đánh thức màn hình và mở khóa, đặt ngón tay vào cảm biến vân tay dưới màn hình của bạn</string>
     <string name="storage_warning_internal">Cảnh báo: Tùy chọn này có thể không hoạt động bình thường hoặc dẫn đến mất dữ liệu và do đó không được khuyến khích</string>
+    <string name="assisted_gps">Sử dụng A-GPS</string>
     <string name="assisted_gps_summary">Tải xuống dữ liệu hỗ trợ vệ tinh từ internet có thể cải thiện đáng kể hiệu suất khởi động GPS. Đối với các cuộc gọi khẩn cấp, A-GPS luôn được phép.</string>
 </resources>

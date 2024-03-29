@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDialogFragment.BluetoothPairingDialogListener;
 import com.android.settings.core.SettingsUIDeviceConfig;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
@@ -71,6 +72,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     private boolean mIsCoordinatedSetMember;
     private boolean mIsLeAudio;
     private boolean mIsLeContactSharingEnabled;
+    private boolean mIsLateBonding;
 
     /**
      * Creates an instance of a BluetoothPairingController.
@@ -97,6 +99,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         mDeviceName = mBluetoothManager.getCachedDeviceManager().getName(mDevice);
         mPbapClientProfile = mBluetoothManager.getProfileManager().getPbapClientProfile();
         mPasskeyFormatted = formatKey(mPasskey);
+        mIsLateBonding = mBluetoothManager.getCachedDeviceManager().isLateBonding(mDevice);
 
         final CachedBluetoothDevice cachedDevice =
                 mBluetoothManager.getCachedDeviceManager().findDevice(mDevice);
@@ -115,7 +118,10 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
             mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                     SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
-            Log.d(TAG, "BT_LE_AUDIO_CONTACT_SHARING_ENABLED is " + mIsLeContactSharingEnabled);
+            Log.d(TAG,
+                "BT_LE_AUDIO_CONTACT_SHARING_ENABLED is "
+                    + mIsLeContactSharingEnabled + " isCooridnatedSetMember "
+                    + mIsCoordinatedSetMember);
         }
     }
 
@@ -192,6 +198,15 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     }
 
     /**
+     * A method for querying if the bluetooth device from a coordinated set is bonding late.
+     *
+     * @return - A boolean indicating if the device is bonding late.
+     */
+    public boolean isLateBonding() {
+        return mIsLateBonding;
+    }
+
+    /**
      * A method for querying if the bluetooth device has a profile already set up on this device.
      *
      * @return - A boolean indicating if the device has previous knowledge of a profile for this
@@ -238,8 +253,8 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
             case BluetoothDevice.ACCESS_REJECTED:
                 return false;
             default:
-                if (mDevice.getBluetoothClass().getDeviceClass()
-                        == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE) {
+                if (BluetoothUtils.isDeviceClassMatched(
+                        mDevice, BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE)) {
                     return BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND == mInitiator;
                 }
                 return false;
@@ -250,11 +265,12 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      * Update Phone book permission
      *
      */
-     public void  setContactSharingState() {
+     public void setContactSharingState() {
          final int permission = mDevice.getPhonebookAccessPermission();
          if (permission == BluetoothDevice.ACCESS_ALLOWED
-                 || (permission == BluetoothDevice.ACCESS_UNKNOWN && mDevice.getBluetoothClass().
-                        getDeviceClass() == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE)) {
+                 || (permission == BluetoothDevice.ACCESS_UNKNOWN
+                 && BluetoothUtils.isDeviceClassMatched(mDevice,
+                 BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE))) {
              onCheckedChanged(null, true);
          } else {
              onCheckedChanged(null, false);

@@ -16,25 +16,14 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="lineagelicense_title">LineageOS משפטי</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">אתם נמצאים רק עוד צעד <xliff:g id="step_count">%1$d</xliff:g> מהפעלת אפשרויות מפתח.</item>
-        <item quantity="two">אתם נמצאים רק עוד <xliff:g id="step_count">%1$d</xliff:g> צעדים מהפעלת אפשרויות מפתח.</item>
-        <item quantity="many">אתם נמצאים רק עוד <xliff:g id="step_count">%1$d</xliff:g> צעדים מהפעלת אפשרויות מפתח.</item>
-        <item quantity="other">אתם נמצאים רק עוד <xliff:g id="step_count">%1$d</xliff:g> צעדים מהפעלת אפשרויות מפתח.</item>
-    </plurals>
     <string name="show_dev_on_cm">אפשרויות מפתח פעילות!</string>
     <string name="show_dev_already_cm">אין צורך. כבר הפעלת את אפשרויות המפתח.</string>
-    <string name="peak_refresh_rate_summary_custom">‏קצב הרענון עולה באופן אוטומטי מ-60 ל-Hz‏%1$d לחלק מהתוכן. פעולה זו מגבירה את השימוש בסוללה.</string>
     <string name="status_bar_double_tap_to_sleep_title">הקש בכדי לכבות מסך</string>
     <string name="status_bar_double_tap_to_sleep_summary">הקש פעמיים על שורת המצב או על מסך נעילה בכדי לכבות את המסך</string>
     <string name="heads_up_notifications_enabled_title">התראות קופצות</string>
     <string name="heads_up_notifications_enabled_summary">הראה התראות חשובות בחלון צף קטן</string>
     <string name="high_touch_sensitivity_title">רגישות גבוהה למגע</string>
     <string name="high_touch_sensitivity_summary">הגבר את רגישות מסך המגע, כך שניתן יהיה להשתמש בו בעת לבישת כפפות</string>
-    <string name="increasing_ring_volume_option_title">עוצמת צלצול מתגברת</string>
-    <string name="increasing_ring_min_volume_title">עוצמה התחלתית</string>
-    <string name="increasing_ring_ramp_up_time_title">אורך זמן ההגברה</string>
-    <string name="lockscreen_media_art_title">הצג תמונת אלבום/מדיה</string>
     <string name="lock_settings_picker_pattern_size_message">בחר גודל תבנית</string>
     <string name="lockpattern_settings_enable_error_path_title">הצג שגיאות דפוס</string>
     <string name="lockpattern_settings_enable_dots_title">הצג נקודות דפוס</string>

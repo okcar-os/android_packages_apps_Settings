@@ -18,12 +18,8 @@
     <string name="lineagelicense_title">Teisinė „LineageOS“ informacija</string>
     <string name="show_dev_on_cm">Jūs įgalinote kūrėjo parinktys!</string>
     <string name="show_dev_already_cm">Nereikia, jūs jau įgalinote kūrėjo parinktys.</string>
-    <string name="peak_refresh_rate_summary_custom">Automatiškai padidinamas kai kurio turinio atnaujinimo dažnis nuo 60 iki %1$d Hz. Vartojama daugiau akumuliatoriaus energijos.</string>
     <string name="high_touch_sensitivity_title">Didelis lietimo jautrumas</string>
     <string name="high_touch_sensitivity_summary">Padidinti liečiamojo ekrano jautrumą tam, kad juo būtų galima naudotis dėvint pirštines</string>
-    <string name="increasing_ring_volume_option_title">Didėjantis skambėjimo garsumas</string>
-    <string name="increasing_ring_min_volume_title">Pradinis garsumas</string>
-    <string name="increasing_ring_ramp_up_time_title">Didėjimo laikas</string>
     <string name="lockpattern_settings_enable_error_path_title">Rodyti modelio klaidą</string>
     <string name="lockpattern_settings_enable_dots_title">Rodyti modelio taškus</string>
     <string name="unlock_scramble_pin_layout_title">Sumaišyti išdėstymą</string>

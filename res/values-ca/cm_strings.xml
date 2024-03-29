@@ -24,14 +24,12 @@
     <string name="berry_black_theme_title">Negre pur</string>
     <string name="berry_black_theme_summary">Fons negre pur per al tema fosc</string>
     <string name="lineagelicense_title">Llicència LineageOS</string>
-    <string name="device_info_protected_single_press">Toqueu per mostrar la informació</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Ara ets a <xliff:g id="step_count">%1$d</xliff:g> pas d\'habilitar les configuracions de desenvolupament.</item>
-        <item quantity="other">Ara ets a <xliff:g id="step_count">%1$d</xliff:g> passos d\'habilitar les configuracions de desenvolupament.</item>
-    </plurals>
+    <string name="show_dev_countdown_cm">{count, plural,
+      one {}=1      {Ara esteu a # pas d\'activar la configuració de desenvolupament.}
+      other   {Ara esteu a # passos d\'activar la configuració de desenvolupament.}
+    }</string>
     <string name="show_dev_on_cm">Has habilitat les configuracions de desenvolupament!</string>
     <string name="show_dev_already_cm">No fa falta, ja has habilitat les configuracions de desenvolupament.</string>
-    <string name="peak_refresh_rate_summary_custom">Augmenta automàticament la freqüència d\'actualització de 60 a %1$d Hz en alguns continguts. Augmenta l\'ús de la bateria.</string>
     <string name="status_bar_double_tap_to_sleep_title">Pica per posar en repòs</string>
     <string name="status_bar_double_tap_to_sleep_summary">Pica dues vegades a la barra d\'estat o a la pantalla de bloqueig per apagar la pantalla</string>
     <string name="high_touch_polling_rate_title">Taxa de petició tàctil elevada</string>
@@ -42,10 +40,6 @@
     <string name="high_touch_sensitivity_summary">Incrementa la sensibilitat de la pantalla tàctil de manera que pugui utilitzar-se si es porten guants</string>
     <string name="tethering_allow_vpn_upstreams_title">Permet als clients utilitzar les VPN</string>
     <string name="tethering_allow_vpn_upstreams_summary">Permet que els clients de punts d\'accés utilitzin les connexions VPN d\'aquest dispositiu per a la connectivitat ascendent</string>
-    <string name="increasing_ring_volume_option_title">Volum del to de trucada creixent</string>
-    <string name="increasing_ring_min_volume_title">Volum inicial</string>
-    <string name="increasing_ring_ramp_up_time_title">Durada del crescendo</string>
-    <string name="lockscreen_media_art_title">Mostra la coberta de l\'àlbum</string>
     <string name="lock_settings_picker_pattern_size_message">Tria una mida de patró</string>
     <string name="lockpattern_settings_enable_error_path_title">Mostra el patró erroni</string>
     <string name="lockpattern_settings_enable_dots_title">Mostra els punts del patró</string>
@@ -69,6 +63,7 @@
     <string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Toca el sensor al costat de la tauleta.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="device">Toca el sensor al costat del dispositiu.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Toca el sensor al costat del mòbil.</string>
+    <string name="security_settings_require_screen_on_to_auth_with_proximity_description">Toqueu el sensor per desbloquejar, encara que la pantalla estigui apagada. El sensor de proximitat evita el desbloqueig accidental.</string>
     <string name="show_navbar_hint_title">Suggerència de navegació</string>
     <string name="show_navbar_hint_summary">Mostra la barra de suggeriments de navegació a la part inferior de la pantalla</string>
     <string name="app_notification_sound_timeout_title">Temps mínim entre els sons de notificació</string>
@@ -107,5 +102,6 @@
     <string name="ambient_display_screen_off_udfps_title" product="device">Mantingueu premut el sensor d\'empremtes digitals per desbloquejar el dispositiu</string>
     <string name="ambient_display_screen_off_udfps_summary">Per activar la pantalla i desbloquejar-la, mantingueu premut el sensor d\'empremtes dactilars de sota la pantalla.</string>
     <string name="storage_warning_internal">Avís: aquesta opció pot no funcionar correctament o provocar la pèrdua de dades i, per tant, no es recomana!</string>
+    <string name="assisted_gps">Utilitza el GPS assistit</string>
     <string name="assisted_gps_summary">Baixa dades dassistència satelital d\'Internet que poden millorar en gran mesura el rendiment inicial del GPS. Per a trucades d\'emergència, sempre es permet el GPS assistit.</string>
 </resources>

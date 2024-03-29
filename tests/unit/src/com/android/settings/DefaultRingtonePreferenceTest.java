@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 import android.content.ContentInterface;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.UserProperties;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -76,6 +77,11 @@ public class DefaultRingtonePreferenceTest {
 
         when(context.getSystemServiceName(UserManager.class)).thenReturn(Context.USER_SERVICE);
         when(context.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+
+        UserProperties userProperties = new UserProperties.Builder().setMediaSharedWithParent(false)
+                .build();
+        when(mUserManager.getUserProperties(UserHandle.of(OTHER_USER_ID))).thenReturn(
+                userProperties);
 
         mRingtoneUri = Uri.parse("content://none");
     }

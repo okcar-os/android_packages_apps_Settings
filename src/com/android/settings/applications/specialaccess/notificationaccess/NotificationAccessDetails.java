@@ -21,6 +21,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
 
 import android.Manifest;
+import android.app.AppOpsManager;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.companion.ICompanionDeviceManager;
@@ -102,6 +103,7 @@ public class NotificationAccessDetails extends DashboardFragment {
                 .setCn(mComponentName)
                 .setNm(context.getSystemService(NotificationManager.class))
                 .setPm(mPm)
+                .setAppOpStr(AppOpsManager.OPSTR_ACCESS_NOTIFICATIONS)
                 .setParent(this);
         use(HeaderPreferenceController.class)
                 .setFragment(this)
@@ -123,6 +125,9 @@ public class NotificationAccessDetails extends DashboardFragment {
                 .setCn(mComponentName)
                 .setUserId(mUserId)
                 .setTargetSdk(listenerTargetSdk);
+        use(MoreSettingsPreferenceController.class)
+                .setPackage(mComponentName.getPackageName())
+                .setPackageManager(mPm);
         final int finalListenerTargetSdk = listenerTargetSdk;
         getPreferenceControllers().forEach(controllers -> {
             controllers.forEach(controller -> {

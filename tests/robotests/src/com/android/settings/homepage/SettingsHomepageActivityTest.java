@@ -27,7 +27,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -49,6 +48,7 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils;
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowPasswordUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
@@ -67,12 +67,14 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class,
-        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class,
+        ShadowActivityManager.class,
+})
 public class SettingsHomepageActivityTest {
 
     @Before
@@ -211,15 +213,13 @@ public class SettingsHomepageActivityTest {
     /** This test is for large screen devices Activity embedding. */
     @Test
     @Config(shadows = ShadowActivityEmbeddingUtils.class)
-    public void onNewIntent_flagClearTop_shouldInitRules() {
+    public void onCreate_flagClearTop_shouldInitRules() {
         ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true);
         SettingsHomepageActivity activity =
                 spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
-        doNothing().when(activity).reloadHighlightMenuKey();
-        TopLevelSettings topLevelSettings = mock(TopLevelSettings.class);
-        doReturn(topLevelSettings).when(activity).getMainFragment();
+        doReturn(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)).when(activity).getIntent();
 
-        activity.onNewIntent(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        activity.onCreate(/* savedInstanceState */ null);
 
         verify(activity).initSplitPairRules();
     }

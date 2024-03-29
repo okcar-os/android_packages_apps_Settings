@@ -18,10 +18,6 @@
     <string name="adb_enable_root">Root-debugging</string>
     <string name="adb_enable_summary_root">Android-debugging as root tastean</string>
     <string name="lineagelicense_title">Juridyske ynformaasje fan LineageOS</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Jo binne noch <xliff:g id="step_count">%1$d</xliff:g> stap fan de opsjes foar ûntwikkelers.</item>
-        <item quantity="other">Jo binne noch <xliff:g id="step_count">%1$d</xliff:g> stappen fan de opsjes foar ûntwikkelers.</item>
-    </plurals>
     <string name="show_dev_on_cm">Jo hawwe de opsjes foar ûntwikkelers ynskeakele!</string>
     <string name="show_dev_already_cm">Net nedich jo hawwe de opsjes foar ûntwikkelers al ynskeakele.</string>
     <string name="status_bar_double_tap_to_sleep_title">Dûbeld tikke foar sliepstân</string>
@@ -32,10 +28,6 @@
     <string name="high_touch_sensitivity_summary">Gefoelichheid fan it skerm ferheegje, sadat it betsjinne wurde kin mei wanten</string>
     <string name="tethering_allow_vpn_upstreams_title">Clients tastean om VPN\'s te brûken</string>
     <string name="tethering_allow_vpn_upstreams_summary">Hotspot-brûkers tastean om de VPN-ferbiningen fan dit apparaat te brûken om te uploaden</string>
-    <string name="increasing_ring_volume_option_title">Tanimmend belfolume</string>
-    <string name="increasing_ring_min_volume_title">Startfolume</string>
-    <string name="increasing_ring_ramp_up_time_title">Opheechtiid</string>
-    <string name="lockscreen_media_art_title">Albumhoezen toane</string>
     <string name="lock_settings_picker_pattern_size_message">Grutte patroan kieze</string>
     <string name="lockpattern_settings_enable_error_path_title">Patroanflater toane</string>
     <string name="lockpattern_settings_enable_dots_title">Patroanknoppen toane</string>

@@ -24,16 +24,12 @@
     <string name="berry_black_theme_title">Popolnoma črna</string>
     <string name="berry_black_theme_summary">Popolnoma črno ozadje za temno temo</string>
     <string name="lineagelicense_title">Pravna obvestila LineageOS</string>
-    <string name="device_info_protected_single_press">Tapnite za prikaz informacij</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Zdaj ste <xliff:g id="step_count">%1$d</xliff:g> korak pred omogočenjem nastavitev za razvijalce.</item>
-        <item quantity="two">Zdaj ste <xliff:g id="step_count">%1$d</xliff:g> koraka pred omogočenjem nastavitev za razvijalce.</item>
-        <item quantity="few">Zdaj ste <xliff:g id="step_count">%1$d</xliff:g> korake pred omogočenjem nastavitev za razvijalce.</item>
-        <item quantity="other">Zdaj ste <xliff:g id="step_count">%1$d</xliff:g> korakov pred omogočenjem nastavitev za razvijalce.</item>
-    </plurals>
+    <string name="show_dev_countdown_cm">{count, plural,
+      =1      {Zdaj ste # korak pred omogočenjem nastavitev za razvijalce.}
+      other   {Zdaj ste # korakov pred omogočenjem nastavitev za razvijalce.}
+    }</string>
     <string name="show_dev_on_cm">Omogočili ste nastavitve za razvijalce!</string>
     <string name="show_dev_already_cm">Ni treba, ste že omogočili nastavitve za razvijalce.</string>
-    <string name="peak_refresh_rate_summary_custom">Samodejno poveča hitrost osveževanja s 60 na %1$d Hz za nekatere vsebine. Poveča porabo baterije.</string>
     <string name="status_bar_double_tap_to_sleep_title">Tap za spanje</string>
     <string name="status_bar_double_tap_to_sleep_summary">Dvakrat tapnite na vrstico stanja ali zaklenjen zaslon, da izklopite zaslon</string>
     <string name="high_touch_polling_rate_title">Visoka hitrost zaznavanja dotika</string>
@@ -44,10 +40,6 @@
     <string name="high_touch_sensitivity_summary">Povečaj občutljivost dotika, tako da ga lahko uporabite, ko nosite rokavice</string>
     <string name="tethering_allow_vpn_upstreams_title">Dovoli odjemalcem uporabo VPN-jev</string>
     <string name="tethering_allow_vpn_upstreams_summary">Dovoli odjemalcem dostopne točke uporabo VPN povezav te naprave za povezovanje</string>
-    <string name="increasing_ring_volume_option_title">Naraščajoča glasnost zvonjenja</string>
-    <string name="increasing_ring_min_volume_title">Začetna glasnost</string>
-    <string name="increasing_ring_ramp_up_time_title">Čas povečanja</string>
-    <string name="lockscreen_media_art_title">Prikaži naslovnico večpredstavnosti</string>
     <string name="lock_settings_picker_pattern_size_message">Izberite velikost vzorca</string>
     <string name="lockpattern_settings_enable_error_path_title">Prikaži napako vzorca</string>
     <string name="lockpattern_settings_enable_dots_title">Prikaži pike vzorca</string>
@@ -71,6 +63,7 @@
     <string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Dotaknite se tipala ob strani vašega tabličnega računalnika.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="device">Dotaknite se tipala ob strani vaše naprave.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Dotaknite se tipala ob strani vašega telefona.</string>
+    <string name="security_settings_require_screen_on_to_auth_with_proximity_description">Dotaknite se tipala za odklep, tudi, ko je zaslon izklopljen. Tipalo bližine prepreči nenamerno odklepanje.</string>
     <string name="show_navbar_hint_title">Namig krmarjenja</string>
     <string name="show_navbar_hint_summary">Pokaži namig krmarjenja na dnu zaslona</string>
     <string name="app_notification_sound_timeout_title">Najmanjši čas med zvoki obvestil</string>
@@ -109,5 +102,6 @@
     <string name="ambient_display_screen_off_udfps_title" product="device">Pridržanje na tipalo za prstne odtise za odklep naprave</string>
     <string name="ambient_display_screen_off_udfps_summary">Da zbudite vaš zaslon in ga odklenete, pridržite vašo podzaslonsko tipalo za prstne odtise</string>
     <string name="storage_warning_internal">Opozorilo: Ta možnost morda ne bo delovala pravilno, ali bo vodila do izgube podatkov, zato ni priporočljiva!</string>
+    <string name="assisted_gps">Uporabi pomožni GPS</string>
     <string name="assisted_gps_summary">Prenesi pomožne podatke satelita iz interneta, kateri lahko močno izboljšajo zagonsko zmogljivost GPS-a. Za nujne klice je pomožni GPS vedno dovoljen.</string>
 </resources>

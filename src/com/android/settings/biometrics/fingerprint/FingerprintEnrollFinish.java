@@ -47,7 +47,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     private static final String ACTION_FINGERPRINT_SETTINGS =
             "android.settings.FINGERPRINT_SETTINGS";
     @VisibleForTesting
-    static final String FINGERPRINT_SUGGESTION_ACTIVITY =
+    public static final String FINGERPRINT_SUGGESTION_ACTIVITY =
             "com.android.settings.SetupFingerprintSuggestionActivity";
 
     private FingerprintManager mFingerprintManager;
@@ -79,7 +79,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                 new FooterButton.Builder(this)
                         .setText(R.string.fingerprint_enroll_button_add)
                         .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build()
         );
 
@@ -88,7 +88,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                         .setText(R.string.security_settings_fingerprint_enroll_done)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
     }

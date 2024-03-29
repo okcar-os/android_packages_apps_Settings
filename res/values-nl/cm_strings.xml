@@ -24,14 +24,12 @@
     <string name="berry_black_theme_title">Puur zwart</string>
     <string name="berry_black_theme_summary">Puur zwarte achtergrond voor donker thema</string>
     <string name="lineagelicense_title">Juridische informatie van LineageOS</string>
-    <string name="device_info_protected_single_press">Tik om info te tonen</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">U bent nog <xliff:g id="step_count">%1$d</xliff:g> stap verwijderd van de opties voor ontwikkelaars.</item>
-        <item quantity="other">U bent nog <xliff:g id="step_count">%1$d</xliff:g> stappen verwijderd van de opties voor ontwikkelaars.</item>
-    </plurals>
+    <string name="show_dev_countdown_cm">{count, plural,
+      one {}=1      {U bent nu # stap verwijderd van het inschakelen van de opties voor ontwikkeling}
+      other   {U bent nu # stappen verwijderd van het uitschakelen van de opties voor ontwikkeling}
+    }</string>
     <string name="show_dev_on_cm">U hebt de opties voor ontwikkelaars ingeschakeld!</string>
     <string name="show_dev_already_cm">Niet nodig, u hebt de opties voor ontwikkelaars al ingeschakeld.</string>
-    <string name="peak_refresh_rate_summary_custom">Hiermee wordt de vernieuwingssnelheid automatisch verhoogd van 60 naar %1$d Hz voor bepaalde content. Het batterijgebruik neemt toe.</string>
     <string name="status_bar_double_tap_to_sleep_title">Tikken om te slapen</string>
     <string name="status_bar_double_tap_to_sleep_summary">Dubbeltikken op de statusbalk of schermvergrendeling om het scherm uit te schakelen</string>
     <string name="high_touch_polling_rate_title">Hoge touch polling snelheid</string>
@@ -42,10 +40,6 @@
     <string name="high_touch_sensitivity_summary">Gevoeligheid van het scherm verhogen, zodat het bediend kan worden met handschoenen</string>
     <string name="tethering_allow_vpn_upstreams_title">Clients toestaan om VPN\'s te gebruiken</string>
     <string name="tethering_allow_vpn_upstreams_summary">Sta hotspot-gebruikers toe om de VPN-verbindingen van dit apparaat te gebruiken om te uploaden</string>
-    <string name="increasing_ring_volume_option_title">In volume toenemende beltoon</string>
-    <string name="increasing_ring_min_volume_title">Startvolume</string>
-    <string name="increasing_ring_ramp_up_time_title">Ophoogtijd</string>
-    <string name="lockscreen_media_art_title">Albumhoezen weergeven</string>
     <string name="lock_settings_picker_pattern_size_message">Grootte patroon kiezen</string>
     <string name="lockpattern_settings_enable_error_path_title">Patroonfout weergeven</string>
     <string name="lockpattern_settings_enable_dots_title">Patroonknoppen weergeven</string>
@@ -69,6 +63,7 @@
     <string name="fingerprint_enroll_touch_dialog_message_side" product="tablet">Raak de sensor aan de zijkant van uw tablet aan.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="device">Raak de sensor aan de zijkant van uw apparaat.</string>
     <string name="fingerprint_enroll_touch_dialog_message_side" product="default">Raak de sensor aan de zijkant van uw telefoon.</string>
+    <string name="security_settings_require_screen_on_to_auth_with_proximity_description">Raak de sensor aan om te ontgrendelen, zelfs wanneer het scherm is uitgeschakeld. Nabijheidssensor voorkomt onbedoeld ontgrendelen.</string>
     <string name="show_navbar_hint_title">Navigatie hint</string>
     <string name="show_navbar_hint_summary">Toon navigatiehintbalk aan de onderkant van het scherm</string>
     <string name="app_notification_sound_timeout_title">Minimale tijd tussen meldingsgeluiden</string>
@@ -107,5 +102,6 @@
     <string name="ambient_display_screen_off_udfps_title" product="device">Vingerafdruksensor lang indrukken om apparaat te ontgrendelen</string>
     <string name="ambient_display_screen_off_udfps_summary">Houdt de vingerafdruksensor lang ingedrukt om het scherm aan te zetten en te ontgrendelen.</string>
     <string name="storage_warning_internal">Waarschuwing: Deze optie werkt mogelijk niet goed of leidt tot gegevensverlies en wordt daarom niet aangeraden!</string>
+    <string name="assisted_gps">Gebruik Assisted GPS</string>
     <string name="assisted_gps_summary">Download satellietondersteuningsgegevens van het internet die de opstartprestaties van GPS aanzienlijk kunnen verbeteren. Voor noodoproepen is assisted GPS altijd toegestaan.</string>
 </resources>

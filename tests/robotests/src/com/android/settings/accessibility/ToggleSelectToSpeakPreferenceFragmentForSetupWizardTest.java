@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,6 +29,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -48,9 +51,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link ToggleSelectToSpeakPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest {
 
     private static final String TEST_TITLE = "test_title";
@@ -71,6 +78,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest {
     public void setUp() {
         mFragment = spy(new TestToggleSelectToSpeakPreferenceFragmentForSetupWizard(mContext));
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mock(LifecycleOwner.class)).when(mFragment).getViewLifecycleOwner();
         when(mActivity.getSwitchBar()).thenReturn(mSwitchBar);
         doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
@@ -78,6 +86,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizardTest {
     @Test
     public void onViewCreated_verifyAction() {
         mFragment.onViewCreated(mGlifLayoutView, null);
+
         verify(mGlifLayoutView).setHeaderText(TEST_TITLE);
         verify(mGlifLayoutView).setDescriptionText(
                 mContext.getString(R.string.select_to_speak_summary));

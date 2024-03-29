@@ -16,23 +16,14 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="lineagelicense_title">LineageOS lizentzia</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Garatzaileen aukerak gaitzeko urrats <xliff:g id="step_count">%1$d</xliff:g>era zaude.</item>
-        <item quantity="other">Garatzaileen aukerak gaitzeko <xliff:g id="step_count">%1$d</xliff:g> urratsera zaude.</item>
-    </plurals>
     <string name="show_dev_on_cm">Garatzaileen aukerak gaitu dituzu!</string>
     <string name="show_dev_already_cm">Ez da behar, aurretik gaitu dituzu garatzaileek aukerak.</string>
-    <string name="peak_refresh_rate_summary_custom">Automatikoki igotzen du freskatze-abiadura 60 Hz-tik %1$d Hz-ra zenbait edukitarako. Bateria-erabilera luzatzen du.</string>
     <string name="status_bar_double_tap_to_sleep_title">Sakatu lokartzeko</string>
     <string name="status_bar_double_tap_to_sleep_summary">Sakatu birritan egoera-barra edo blokeo-pantaila pantaila itzaltzeko</string>
     <string name="heads_up_notifications_enabled_title">Jakinarazpen flotatzaileak</string>
     <string name="heads_up_notifications_enabled_summary">Bistaratu lehentasunezko jakinarazpenak leiho flotatzaile txiki batean</string>
     <string name="high_touch_sensitivity_title">Ukipen sentsibilitate altua</string>
     <string name="high_touch_sensitivity_summary">Areagotu pantailaren sentsibilitatea, eskularruekin erabilgarria izan dadin</string>
-    <string name="increasing_ring_volume_option_title">Dei doinu gorakorra</string>
-    <string name="increasing_ring_min_volume_title">Hasierako bolumena</string>
-    <string name="increasing_ring_ramp_up_time_title">Maldaren iraupena</string>
-    <string name="lockscreen_media_art_title">Bistaratu azalaren irudia</string>
     <string name="lock_settings_picker_pattern_size_message">Aukeratu ereduaren tamaina</string>
     <string name="lockpattern_settings_enable_error_path_title">Erakutsi eredu errorea</string>
     <string name="lockpattern_settings_enable_dots_title">Erakutsi ereduaren puntuak</string>

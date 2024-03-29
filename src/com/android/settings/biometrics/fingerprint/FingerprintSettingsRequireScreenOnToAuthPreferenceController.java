@@ -26,6 +26,8 @@ import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.List;
 
@@ -33,6 +35,7 @@ import java.util.List;
  * Preference controller that controls whether a SFPS device is required to be interactive for
  * fingerprint authentication to unlock the device.
  */
+@SearchIndexable
 public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
         extends FingerprintSettingsPreferenceController {
     private static final String TAG =
@@ -96,10 +99,9 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
     @Override
     public int getAvailabilityStatus() {
         if (mFingerprintManager != null
-                && mFingerprintManager.isHardwareDetected()
-                && !isUdfps()) {
+                && mFingerprintManager.isHardwareDetected()) {
             return mFingerprintManager.hasEnrolledTemplates(getUserId())
-                    ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+                    ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
         } else {
             return UNSUPPORTED_ON_DEVICE;
         }
@@ -109,13 +111,10 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
         return UserHandle.of(getUserId()).getIdentifier();
     }
 
-    private boolean isUdfps() {
-        for (FingerprintSensorPropertiesInternal prop : mSensorProperties) {
-            if (prop.isAnyUdfpsType()) {
-                return true;
-            }
-        }
-        return false;
-    }
+    /**
+     * This feature is not directly searchable.
+     */
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {};
 
 }

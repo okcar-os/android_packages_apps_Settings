@@ -21,7 +21,8 @@
     android:title="@string/data_usage_app_summary_title">
 
     <com.android.settings.datausage.SpinnerPreference
-        android:key="cycle" />
+        android:key="cycle"
+        settings:controller="com.android.settings.datausage.AppDataUsageCycleController" />
 
     <PreferenceCategory
         android:key="app_data_usage_summary_category">
@@ -55,7 +56,24 @@
 
         <Preference
             android:key="app_settings"
-            android:title="@string/data_usage_app_settings" />
+            android:title="@string/data_usage_app_settings"
+            settings:controller="com.android.settings.datausage.AppDataUsageAppSettingsController" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="restrict_all"
+            android:title="@string/data_usage_app_restrict_all"
+            android:summary="@string/data_usage_app_restrict_all_summary" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="restrict_wifi"
+            android:title="@string/data_usage_app_restrict_wifi"
+            android:summary="@string/data_usage_app_restrict_wifi_summary" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="restrict_cellular"
+            android:title="@string/data_usage_app_restrict_mobile"
+            android:summary="@string/data_usage_app_restrict_mobile_summary"
+            settings:isPreferenceVisible="@bool/config_show_sim_info" />
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="restrict_all"
@@ -98,6 +116,7 @@
 
     <PreferenceCategory
         android:key="app_list"
-        android:title="@string/data_usage_other_apps" />
+        android:title="@string/data_usage_other_apps"
+        settings:controller="com.android.settings.datausage.AppDataUsageListController" />
 
 </PreferenceScreen>

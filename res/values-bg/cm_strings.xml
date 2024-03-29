@@ -24,13 +24,8 @@
     <string name="berry_black_theme_title">Натурално черно</string>
     <string name="berry_black_theme_summary">Натурален черен фон за тъмна тема</string>
     <string name="lineagelicense_title">LineageOS правна информация</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">Вече сте на <xliff:g id="step_count">%1$d </xliff:g> крачка от включването на \"Опции на програмиста\".</item>
-        <item quantity="other">Вече сте на <xliff:g id="step_count">%1$d </xliff:g> крачки от включването на \"Опции на програмиста\".</item>
-    </plurals>
     <string name="show_dev_on_cm">Включихте менюто \"Опции на програмиста\"!</string>
     <string name="show_dev_already_cm">Няма нужда, вече сте включили менюто Опции на програмиста.</string>
-    <string name="peak_refresh_rate_summary_custom">Автоматично увеличава честотата на опресняване от 60 на %1$d Hz за част от съдържанието. По-интензивно използване на батерията.</string>
     <string name="status_bar_double_tap_to_sleep_title">Натиснете, за заспиване</string>
     <string name="status_bar_double_tap_to_sleep_summary">Докоснете двукратно лентата на състоянието или заключващия екран, за да изключите дисплея</string>
     <string name="heads_up_notifications_enabled_title">Изскачащи известия</string>
@@ -39,10 +34,6 @@
     <string name="high_touch_sensitivity_summary">Увеличи сензорната чувствителност, така че може да се използва докато носите ръкавици</string>
     <string name="tethering_allow_vpn_upstreams_title">Разрешете на клиентите да използват VPN</string>
     <string name="tethering_allow_vpn_upstreams_summary">Разрешете на клиентите на точка за достъп да използват VPN връзките на това устройство, за да се свържат с мрежата</string>
-    <string name="increasing_ring_volume_option_title">Увеличаване силата на звука при звънене</string>
-    <string name="increasing_ring_min_volume_title">Начална сила на звука</string>
-    <string name="increasing_ring_ramp_up_time_title">Време на увеличение</string>
-    <string name="lockscreen_media_art_title">Показване на артистична обложка</string>
     <string name="lock_settings_picker_pattern_size_message">Изберете размера на шаблона</string>
     <string name="lockpattern_settings_enable_error_path_title">Покажи модела на грешката</string>
     <string name="lockpattern_settings_enable_dots_title">Покажи точките на модела</string>

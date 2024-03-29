@@ -16,18 +16,10 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="lineagelicense_title">LineageOS ലീഗല്‍</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="one">ഡെവലപ്പ്മെന്റ് ക്രമീകരണങ്ങൾ പ്രാപ്തമാക്കുന്നതിന് നിങ്ങള്‍ %1$d ഘട്ടം അകലെയാണ്.</item>
-        <item quantity="other">ഡെവലപ്പ്മെന്റ് ക്രമീകരണങ്ങൾ പ്രാപ്തമാക്കുന്നതിന് നിങ്ങള്‍ <xliff:g id="step_count">%1$d</xliff:g> ഘട്ടങ്ങൾ അകലെയാണ്.</item>
-    </plurals>
     <string name="show_dev_on_cm">നിങ്ങൾ ഡെവലപ്പ്മെന്റ് ക്രമീകരണങ്ങൾ പ്രാപ്തമാക്കി!</string>
     <string name="show_dev_already_cm">ആവശ്യമില്ല, നിങ്ങൾ ഇതിനകം ഡെവലപ്പ്മെന്റ് ക്രമീകരണങ്ങൾ പ്രാപ്തമാക്കി.</string>
-    <string name="peak_refresh_rate_summary_custom">ചില ഉള്ളടക്കങ്ങളുടെ പുതുക്കൽ നിരക്ക് 60 Hz-ൽ നിന്നും %1$d Hz-ലേക്ക് സ്വയമേവ ഉയർത്തുന്നു. ബാറ്ററി ഉപയോഗം വർദ്ധിപ്പിക്കുന്നു.</string>
     <string name="high_touch_sensitivity_title">ഉയര്‍ന്ന സ്പര്‍ശന സംവേദനക്ഷമത</string>
     <string name="high_touch_sensitivity_summary">കയ്യുറകൾ ധരിച്ചിരിക്കുമ്പോള്‍ ഉപയോഗിക്കുന്നതിനായി ടച്ച്സ്ക്രീൻ സെന്‍സിറ്റിവിറ്റി വര്‍ദ്ധിപ്പിക്കുക</string>
-    <string name="increasing_ring_volume_option_title">വര്‍ദ്ധിക്കുന്ന റിംഗ് വോളിയം</string>
-    <string name="increasing_ring_min_volume_title">വോളിയം ആരംഭിക്കുക</string>
-    <string name="increasing_ring_ramp_up_time_title">റാംപ്-അപ്പ് സമയം</string>
     <string name="lockpattern_settings_enable_error_path_title">പാറ്റേൺ പിശക് ദൃശ്യമാക്കുക</string>
     <string name="lockpattern_settings_enable_dots_title">ഡോട്ടുകൾ പാറ്റേൺ ദൃശ്യമാക്കുക</string>
     <string name="unlock_scramble_pin_layout_title">സ്ക്രാമ്പിള്‍ ചെയ്ത ലേഔട്ട്</string>

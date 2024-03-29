@@ -27,6 +27,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class DataSaverBackend {
@@ -43,10 +45,11 @@ public class DataSaverBackend {
     private boolean mDenylistInitialized;
 
     // TODO: Staticize into only one.
-    public DataSaverBackend(Context context) {
-        mContext = context;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mPolicyManager = NetworkPolicyManager.from(context);
+    public DataSaverBackend(@NotNull Context context) {
+        // TODO(b/246537614):Use fragment context to DataSaverBackend class will caused memory leak
+        mContext = context.getApplicationContext();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        mPolicyManager = NetworkPolicyManager.from(mContext);
     }
 
     public void addListener(Listener listener) {
@@ -202,8 +205,10 @@ public class DataSaverBackend {
     public interface Listener {
         void onDataSaverChanged(boolean isDataSaving);
 
-        void onAllowlistStatusChanged(int uid, boolean isAllowlisted);
+        /** This is called when allow list status is changed. */
+        default void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {}
 
-        void onDenylistStatusChanged(int uid, boolean isDenylisted);
+        /** This is called when deny list status is changed. */
+        default void onDenylistStatusChanged(int uid, boolean isDenylisted) {}
     }
 }

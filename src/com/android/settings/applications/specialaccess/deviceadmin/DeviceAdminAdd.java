@@ -124,7 +124,6 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
     AppOpsManager mAppOps;
     DeviceAdminInfo mDeviceAdmin;
     String mAddMsgText;
-    String mProfileOwnerName;
 
     ImageView mAdminIcon;
     TextView mAdminName;
@@ -159,7 +158,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
 
         mDPM = getSystemService(DevicePolicyManager.class);
         mAppOps = getSystemService(AppOpsManager.class);
-        mLayoutInflaternflater = getSystemService(LayoutInflater.class);
+        mLayoutInflaternflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         PackageManager packageManager = getPackageManager();
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
@@ -190,8 +189,6 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             setResult(RESULT_CANCELED);
             setFinishOnTouchOutside(true);
             mAddingProfileOwner = true;
-            mProfileOwnerName =
-                    getIntent().getStringExtra(DevicePolicyManager.EXTRA_PROFILE_OWNER_NAME);
             String callingPackage = getCallingPackage();
             if (callingPackage == null || !callingPackage.equals(who.getPackageName())) {
                 Log.e(TAG, "Unknown or incorrect caller");
@@ -339,6 +336,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
                     .create();
             dialog.show();
 
+            String profileOwnerName =
+                    getIntent().getStringExtra(DevicePolicyManager.EXTRA_PROFILE_OWNER_NAME);
             mActionButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
             mActionButton.setFilterTouchesWhenObscured(true);
             mAddMsg = dialog.findViewById(R.id.add_msg_simplified);
@@ -347,7 +346,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             mAdminWarning.setText(
                     mDPM.getResources().getString(NEW_DEVICE_ADMIN_WARNING_SIMPLIFIED, () ->
                             getString(R.string.device_admin_warning_simplified,
-                                    mProfileOwnerName), mProfileOwnerName));
+                                    profileOwnerName), profileOwnerName));
             return;
         }
         setContentView(R.layout.device_admin_add);
@@ -531,8 +530,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
         }
         if (mAddingProfileOwner) {
             try {
-                mDPM.setProfileOwner(mDeviceAdmin.getComponent(),
-                        mProfileOwnerName, UserHandle.myUserId());
+                mDPM.setProfileOwner(mDeviceAdmin.getComponent(), UserHandle.myUserId());
             } catch (RuntimeException re) {
                 setResult(Activity.RESULT_CANCELED);
             }
@@ -575,7 +573,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
     void logSpecialPermissionChange(boolean allow, String packageName) {
         int logCategory = allow ? SettingsEnums.APP_SPECIAL_PERMISSION_ADMIN_ALLOW :
                 SettingsEnums.APP_SPECIAL_PERMISSION_ADMIN_DENY;
-        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(
                 SettingsEnums.PAGE_UNKNOWN,
                 logCategory,
                 SettingsEnums.PAGE_UNKNOWN,
@@ -649,7 +647,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
     }
 
     void updateInterface() {
-        findViewById(R.id.restricted_icon).setVisibility(View.GONE);
+        findViewById(com.android.settingslib.widget.restricted.R.id.restricted_icon)
+                .setVisibility(View.GONE);
         mAdminIcon.setImageDrawable(mDeviceAdmin.loadIcon(getPackageManager()));
         mAdminName.setText(mDeviceAdmin.loadLabel(getPackageManager()));
         try {
@@ -684,7 +683,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
                 final boolean hasBaseRestriction = hasBaseCantRemoveProfileRestriction();
                 if ((hasBaseRestriction && mDPM.isOrganizationOwnedDeviceWithManagedProfile())
                         || (admin != null && !hasBaseRestriction)) {
-                    findViewById(R.id.restricted_icon).setVisibility(View.VISIBLE);
+                    findViewById(com.android.settingslib.widget.restricted.R.id.restricted_icon)
+                            .setVisibility(View.VISIBLE);
                 }
                 mActionButton.setEnabled(admin == null && !hasBaseRestriction);
             } else if (isProfileOwner || mDeviceAdmin.getComponent().equals(

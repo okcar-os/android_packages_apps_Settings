@@ -19,13 +19,11 @@ package com.android.settings.accessibility;
 import static android.app.Activity.RESULT_CANCELED;
 
 import static com.android.settings.Utils.getAdaptiveIcon;
-import static com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE;
 import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -88,25 +86,31 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-        final String title = getContext().getString(R.string.vision_settings_title);
-        final String description = getContext().getString(R.string.vision_settings_description);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
-        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
-                description, icon);
+        if (view instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+            final String title = getContext().getString(R.string.vision_settings_title);
+            final String description = getContext().getString(R.string.vision_settings_description);
+            final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
+            AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
+                    description, icon);
 
-        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
-        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
-            setResult(RESULT_CANCELED);
-            finish();
-        });
+            final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+            AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,
+                    () -> {
+                        setResult(RESULT_CANCELED);
+                        finish();
+                    });
+        }
     }
 
     @Override
     public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
-        Bundle savedInstanceState) {
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-        return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+            Bundle savedInstanceState) {
+        if (parent instanceof GlifPreferenceLayout) {
+            final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        }
+        return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
     @Override
@@ -121,12 +125,9 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
     public void onResume() {
         super.onResume();
         updateAccessibilityServicePreference(mScreenReaderPreference,
-                SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME,
-                VolumeShortcutToggleScreenReaderPreferenceFragmentForSetupWizard.class.getName());
+                SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME);
         updateAccessibilityServicePreference(mSelectToSpeakPreference,
-                SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME,
-                VolumeShortcutToggleSelectToSpeakPreferenceFragmentForSetupWizard.class.getName());
-        configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreference);
+                SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME);
     }
 
     @Override
@@ -184,7 +185,7 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
     }
 
     private void updateAccessibilityServicePreference(RestrictedPreference preference,
-            String packageName, String serviceName, String targetFragment) {
+            String packageName, String serviceName) {
         final AccessibilityServiceInfo info = findService(packageName, serviceName);
         if (info == null) {
             getPreferenceScreen().removePreference(preference);
@@ -200,9 +201,6 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
         final ComponentName componentName =
                 new ComponentName(serviceInfo.packageName, serviceInfo.name);
         preference.setKey(componentName.flattenToString());
-        if (AccessibilityUtil.getAccessibilityServiceFragmentType(info) == VOLUME_SHORTCUT_TOGGLE) {
-            preference.setFragment(targetFragment);
-        }
 
         // Update the extras.
         final Bundle extras = preference.getExtras();
@@ -219,14 +217,5 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
 
         final String htmlDescription = info.loadHtmlDescription(getPackageManager());
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
-    }
-
-    private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
-        final Context context = preference.getContext();
-        preference.setFragment(
-                ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
-        final Bundle extras = preference.getExtras();
-        MagnificationGesturesPreferenceController
-                .populateMagnificationGesturesPreferenceExtras(extras, context);
     }
 }

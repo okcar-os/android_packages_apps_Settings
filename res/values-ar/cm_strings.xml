@@ -24,18 +24,8 @@
     <string name="berry_black_theme_title">أسود خالص</string>
     <string name="berry_black_theme_summary">خلفية سوداء خالصة للوضع المظلم</string>
     <string name="lineagelicense_title">قانون LineageOS</string>
-    <string name="device_info_protected_single_press">انقر لعرض المعلومات</string>
-    <plurals name="show_dev_countdown_cm">
-        <item quantity="zero">أنت الآن على بُعد <xliff:g id="step_count">%1$d</xliff:g> خطوة من تمكين خيارات المطور.</item>
-        <item quantity="one">أنت الآن على بُعد خطوة واحدة من تمكين خيارات المطور.</item>
-        <item quantity="two">أنت الآن على بُعد خطوتين من تمكين خيارات المطور.</item>
-        <item quantity="few">أنت الآن على بُعد <xliff:g id="step_count">%1$d</xliff:g> خطوات من تمكين خيارات المطور.</item>
-        <item quantity="many">أنت الآن على بُعد <xliff:g id="step_count">%1$d</xliff:g> خطوة من تمكين خيارات المطور.</item>
-        <item quantity="other">أنت الآن على بُعد <xliff:g id="step_count">%1$d</xliff:g> خطوة من تمكين خيارات المطور.</item>
-    </plurals>
     <string name="show_dev_on_cm">مكّنتَ خيارات المطور!</string>
     <string name="show_dev_already_cm">لا داعي، فخيارات المطور مفعّلة.</string>
-    <string name="peak_refresh_rate_summary_custom">تعمل هذه الميزة على رفع معدل إعادة التحميل تلقائيًا من 60 إلى %1$d هرتز لبعض أنواع المحتوى، ما يؤدي إلى زيادة استخدام البطارية.</string>
     <string name="status_bar_double_tap_to_sleep_title">اضغط للنوم</string>
     <string name="status_bar_double_tap_to_sleep_summary">الضغط مرتين فوق شريط الحالة لإطفاء الشاشة</string>
     <string name="heads_up_notifications_enabled_title">الإشعارات العائمة</string>
@@ -44,10 +34,6 @@
     <string name="high_touch_sensitivity_summary">زيادة حساسية شاشة اللمس حتى يمكن استخدامها أثناء ارتداء القفازات</string>
     <string name="tethering_allow_vpn_upstreams_title">السماح للعملاء باستخدام الـ VPN</string>
     <string name="tethering_allow_vpn_upstreams_summary">السماح لعملاء نقطة الاتصال باستخدام اتصالات الـVPN لهذا الجهاز\u2019</string>
-    <string name="increasing_ring_volume_option_title">حجم الصوت متزايد</string>
-    <string name="increasing_ring_min_volume_title">حجم الصوت البدئيّ</string>
-    <string name="increasing_ring_ramp_up_time_title">زمن التدرج</string>
-    <string name="lockscreen_media_art_title">عرض الغلاف الفني للوسائط</string>
     <string name="lock_settings_picker_pattern_size_message">اختر حجم النمط</string>
     <string name="lockpattern_settings_enable_error_path_title">إظهار خطأ النمط</string>
     <string name="lockpattern_settings_enable_dots_title">إظهار نقاط النمط</string>

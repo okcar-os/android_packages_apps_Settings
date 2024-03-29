@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics;
 
+import static android.util.FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT;
+
 import android.annotation.IntDef;
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -26,7 +28,11 @@ import android.content.IntentSender;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
+import android.os.Bundle;
 import android.os.storage.StorageManager;
+import android.text.BidiFormatter;
+import android.text.SpannableStringBuilder;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.Surface;
 
@@ -36,12 +42,15 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
+import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
+import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
@@ -56,6 +65,9 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class BiometricUtils {
     private static final String TAG = "BiometricUtils";
+
+    /** The character ' • ' to separate the setup choose options */
+    public static final String SEPARATOR = " \u2022 ";
 
     // Note: Theis IntDef must align SystemUI DevicePostureInt
     @IntDef(prefix = {"DEVICE_POSTURE_"}, value = {
@@ -96,6 +108,8 @@ public class BiometricUtils {
     };
 
     /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     *
      * Given the result from confirming or choosing a credential, request Gatekeeper to generate
      * a HardwareAuthToken with the Gatekeeper Password together with a biometric challenge.
      *
@@ -107,6 +121,7 @@ public class BiometricUtils {
      * @throws GatekeeperCredentialNotMatchException if Gatekeeper response is not match
      * @throws IllegalStateException if Gatekeeper Password is missing
      */
+    @Deprecated
     public static byte[] requestGatekeeperHat(@NonNull Context context, @NonNull Intent result,
             int userId, long challenge) {
         if (!containsGatekeeperPasswordHandle(result)) {
@@ -117,6 +132,10 @@ public class BiometricUtils {
         return requestGatekeeperHat(context, gatekeeperPasswordHandle, userId, challenge);
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static byte[] requestGatekeeperHat(@NonNull Context context, long gkPwHandle, int userId,
             long challenge) {
         final LockPatternUtils utils = new LockPatternUtils(context);
@@ -128,15 +147,25 @@ public class BiometricUtils {
         return response.getGatekeeperHAT();
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static boolean containsGatekeeperPasswordHandle(@Nullable Intent data) {
         return data != null && data.hasExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE);
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static long getGatekeeperPasswordHandle(@NonNull Intent data) {
         return data.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 0L);
     }
 
     /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     *
      * Requests {@link com.android.server.locksettings.LockSettingsService} to remove the
      * gatekeeper password associated with a previous
      * {@link ChooseLockSettingsHelper.Builder#setRequestGatekeeperPasswordHandle(boolean)}
@@ -144,6 +173,7 @@ public class BiometricUtils {
      * @param context Caller's context
      * @param data The onActivityResult intent from ChooseLock* or ConfirmLock*
      */
+    @Deprecated
     public static void removeGatekeeperPasswordHandle(@NonNull Context context,
             @Nullable Intent data) {
         if (data == null) {
@@ -155,6 +185,10 @@ public class BiometricUtils {
         removeGatekeeperPasswordHandle(context, getGatekeeperPasswordHandle(data));
     }
 
+    /**
+     * @deprecated Use {@link com.android.settings.biometrics.GatekeeperPasswordProvider} instead.
+     */
+    @Deprecated
     public static void removeGatekeeperPasswordHandle(@NonNull Context context, long handle) {
         final LockPatternUtils utils = new LockPatternUtils(context);
         utils.removeGatekeeperPasswordHandle(handle);
@@ -171,7 +205,7 @@ public class BiometricUtils {
         if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
             // Default to PIN lock in setup wizard
             Intent intent = new Intent(context, SetupChooseLockGeneric.class);
-            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+            if (StorageManager.isFileEncrypted()) {
                 intent.putExtra(
                         LockPatternUtils.PASSWORD_TYPE_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
@@ -187,18 +221,52 @@ public class BiometricUtils {
 
     /**
      * @param context caller's context
+     * @param isSuw if it is running in setup wizard flows
+     * @param suwExtras setup wizard extras for new intent
+     * @return Intent for starting ChooseLock*
+     */
+    public static Intent getChooseLockIntent(@NonNull Context context,
+            boolean isSuw, @NonNull Bundle suwExtras) {
+        if (isSuw) {
+            // Default to PIN lock in setup wizard
+            Intent intent = new Intent(context, SetupChooseLockGeneric.class);
+            if (StorageManager.isFileEncrypted()) {
+                intent.putExtra(
+                        LockPatternUtils.PASSWORD_TYPE_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment
+                        .EXTRA_SHOW_OPTIONS_BUTTON, true);
+            }
+            intent.putExtras(suwExtras);
+            return intent;
+        } else {
+            return new Intent(context, ChooseLockGeneric.class);
+        }
+    }
+
+    /**
+     * @param context caller's context
      * @param activityIntent The intent that started the caller's activity
      * @return Intent for starting FingerprintEnrollFindSensor
      */
     public static Intent getFingerprintFindSensorIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
-            Intent intent = new Intent(context, SetupFingerprintEnrollFindSensor.class);
-            SetupWizardUtils.copySetupExtras(activityIntent, intent);
-            return intent;
+        final boolean isSuw =  WizardManagerHelper.isAnySetupWizard(activityIntent);
+        final Intent intent;
+        if (FeatureFlagUtils.isEnabled(context, SETTINGS_BIOMETRICS2_ENROLLMENT)) {
+            intent = new Intent(context, isSuw
+                    ? FingerprintEnrollmentActivity.SetupActivity.class
+                    : FingerprintEnrollmentActivity.class);
+            intent.putExtra(BiometricEnrollActivity.EXTRA_SKIP_INTRO, true);
         } else {
-            return new Intent(context, FingerprintEnrollFindSensor.class);
+            intent = new Intent(context, isSuw
+                    ? SetupFingerprintEnrollFindSensor.class
+                    : FingerprintEnrollFindSensor.class);
         }
+        if (isSuw) {
+            SetupWizardUtils.copySetupExtras(activityIntent, intent);
+        }
+        return intent;
     }
 
     /**
@@ -208,13 +276,21 @@ public class BiometricUtils {
      */
     public static Intent getFingerprintIntroIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
-            Intent intent = new Intent(context, SetupFingerprintEnrollIntroduction.class);
-            WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
-            return intent;
+        final boolean isSuw = WizardManagerHelper.isAnySetupWizard(activityIntent);
+        final Intent intent;
+        if (FeatureFlagUtils.isEnabled(context, SETTINGS_BIOMETRICS2_ENROLLMENT)) {
+            intent = new Intent(context, isSuw
+                    ? FingerprintEnrollmentActivity.SetupActivity.class
+                    : FingerprintEnrollmentActivity.class);
         } else {
-            return new Intent(context, FingerprintEnrollIntroduction.class);
+            intent = new Intent(context, isSuw
+                    ? SetupFingerprintEnrollIntroduction.class
+                    : FingerprintEnrollIntroduction.class);
         }
+        if (isSuw) {
+            WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
+        }
+        return intent;
     }
 
     /**
@@ -432,5 +508,47 @@ public class BiometricUtils {
      */
     public static boolean isLandscape(@NonNull Context context) {
         return context.getDisplay().getRotation() == Surface.ROTATION_90;
+    }
+
+    /**
+     * Returns true if the device supports Face enrollment in SUW flow
+     */
+    public static boolean isFaceSupportedInSuw(Context context) {
+        return FeatureFactory.getFeatureFactory().getFaceFeatureProvider().isSetupWizardSupported(
+                context);
+    }
+
+    /**
+     * Returns the combined screen lock options by device biometrics config
+     * @param context the application context
+     * @param screenLock the type of screen lock(PIN, Pattern, Password) in string
+     * @param hasFingerprint device support fingerprint or not
+     * @param isFaceSupported device support face or not
+     * @return the options combined with screen lock, face, and fingerprint in String format.
+     */
+    public static String getCombinedScreenLockOptions(Context context,
+            CharSequence screenLock, boolean hasFingerprint, boolean isFaceSupported) {
+        final SpannableStringBuilder ssb = new SpannableStringBuilder();
+        final BidiFormatter bidi = BidiFormatter.getInstance();
+        // Assume the flow is "Screen Lock" + "Face" + "Fingerprint"
+        ssb.append(bidi.unicodeWrap(screenLock));
+
+        if (hasFingerprint) {
+            ssb.append(bidi.unicodeWrap(SEPARATOR));
+            ssb.append(bidi.unicodeWrap(
+                    capitalize(context.getString(R.string.security_settings_fingerprint))));
+        }
+
+        if (isFaceSupported) {
+            ssb.append(bidi.unicodeWrap(SEPARATOR));
+            ssb.append(bidi.unicodeWrap(
+                    capitalize(context.getString(R.string.keywords_face_settings))));
+        }
+
+        return ssb.toString();
+    }
+
+    private static String capitalize(final String input) {
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1);
     }
 }

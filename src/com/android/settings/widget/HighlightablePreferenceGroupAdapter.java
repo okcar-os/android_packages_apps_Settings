@@ -29,12 +29,14 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -122,6 +124,9 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
                 && TextUtils.equals(mHighlightKey, getItem(position).getKey()))) {
             // This position should be highlighted. If it's highlighted before - skip animation.
             addHighlightBackground(holder, !mFadeInAnimated);
+            if (v != null) {
+                v.requestAccessibilityFocus();
+            }
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
             // View with highlight is reused for a view that should not have highlight
             removeHighlightBackground(holder, false /* animate */);
@@ -141,6 +146,8 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
             return;
         }
 
+        // Highlight request accepted
+        mHighlightRequested = true;
         // Collapse app bar after 300 milliseconds.
         if (appBarLayout != null) {
             root.postDelayed(() -> {
@@ -148,19 +155,56 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
             }, DELAY_COLLAPSE_DURATION_MILLIS);
         }
 
+        // Remove the animator as early as possible to avoid a RecyclerView crash.
+        recyclerView.setItemAnimator(null);
         // Scroll to correct position after 600 milliseconds.
         root.postDelayed(() -> {
-            mHighlightRequested = true;
-            // Remove the animator to avoid a RecyclerView crash.
-            recyclerView.setItemAnimator(null);
-            recyclerView.smoothScrollToPosition(position);
-            mHighlightPosition = position;
+            if (ensureHighlightPosition()) {
+                recyclerView.smoothScrollToPosition(mHighlightPosition);
+                highlightAndFocusTargetItem(recyclerView, mHighlightPosition);
+            }
         }, DELAY_HIGHLIGHT_DURATION_MILLIS);
+    }
 
-        // Highlight preference after 900 milliseconds.
-        root.postDelayed(() -> {
-            notifyItemChanged(position);
-        }, DELAY_COLLAPSE_DURATION_MILLIS + DELAY_HIGHLIGHT_DURATION_MILLIS);
+    private void highlightAndFocusTargetItem(RecyclerView recyclerView, int highlightPosition) {
+        ViewHolder target = recyclerView.findViewHolderForAdapterPosition(highlightPosition);
+        if (target != null) { // view already visible
+            notifyItemChanged(mHighlightPosition);
+            target.itemView.requestFocus();
+        } else { // otherwise we're about to scroll to that view (but we might not be scrolling yet)
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        notifyItemChanged(mHighlightPosition);
+                        ViewHolder target = recyclerView
+                                .findViewHolderForAdapterPosition(highlightPosition);
+                        if (target != null) {
+                            target.itemView.requestFocus();
+                        }
+                        recyclerView.removeOnScrollListener(this);
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * Make sure we highlight the real-wanted position in case of preference position already
+     * changed when the delay time comes.
+     */
+    private boolean ensureHighlightPosition() {
+        if (TextUtils.isEmpty(mHighlightKey)) {
+            return false;
+        }
+        final int position = getPreferenceAdapterPosition(mHighlightKey);
+        final boolean allowHighlight = position >= 0;
+        if (allowHighlight && mHighlightPosition != position) {
+            Log.w(TAG, "EnsureHighlight: position has changed since last highlight request");
+            // Make sure RecyclerView always uses latest correct position to avoid exceptions.
+            mHighlightPosition = position;
+        }
+        return allowHighlight;
     }
 
     public boolean isHighlightRequested() {

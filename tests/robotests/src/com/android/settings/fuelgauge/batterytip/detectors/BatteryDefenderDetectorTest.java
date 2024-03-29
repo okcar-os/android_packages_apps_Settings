@@ -38,8 +38,7 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class BatteryDefenderDetectorTest {
 
-    @Mock
-    private BatteryInfo mBatteryInfo;
+    @Mock private BatteryInfo mBatteryInfo;
     private BatteryDefenderDetector mBatteryDefenderDetector;
     private Context mContext;
 
@@ -53,39 +52,38 @@ public class BatteryDefenderDetectorTest {
 
         mContext = ApplicationProvider.getApplicationContext();
 
-        mBatteryDefenderDetector = new BatteryDefenderDetector(
-            mBatteryInfo, mContext);
+        mBatteryDefenderDetector = new BatteryDefenderDetector(mBatteryInfo, mContext);
 
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
-    public void testDetect_notOverheatedNotExtraDefend_tipInvisible() {
-        mBatteryInfo.isOverheated = false;
+    public void testDetect_notDefenderNotExtraDefend_tipInvisible() {
+        mBatteryInfo.isBatteryDefender = false;
         when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(false);
 
         assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
     }
 
     @Test
-    public void testDetect_notOverheatedIsExtraDefend_tipInvisible() {
-        mBatteryInfo.isOverheated = false;
+    public void testDetect_notDefenderIsExtraDefend_tipInvisible() {
+        mBatteryInfo.isBatteryDefender = false;
         when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(true);
 
         assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
     }
 
     @Test
-    public void testDetect_isOverheatedIsExtraDefend_tipInvisible() {
-        mBatteryInfo.isOverheated = false;
+    public void testDetect_isDefenderIsExtraDefend_tipInvisible() {
+        mBatteryInfo.isBatteryDefender = false;
         when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(true);
 
         assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
     }
 
     @Test
-    public void testDetect_isOverheatedNotExtraDefend_tipNew() {
-        mBatteryInfo.isOverheated = true;
+    public void testDetect_isDefenderNotExtraDefend_tipNew() {
+        mBatteryInfo.isBatteryDefender = true;
         when(mFakeFeatureFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(false);
 
         assertThat(mBatteryDefenderDetector.detect().getState())

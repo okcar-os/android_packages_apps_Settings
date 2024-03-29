@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -152,6 +153,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         }
     }
 
+    @Nullable
     public AppStateDataUsageBridge.DataUsageState getDataUsageState() {
         return mDataUsageState;
     }
@@ -174,7 +176,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         if (mDataUsageState != null) {
             setChecked(mDataUsageState.isDataSaverAllowlisted);
             if (isDisabledByAdmin()) {
-                setSummary(R.string.disabled_by_admin);
+                setSummary(com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
             } else if (mDataUsageState.isDataSaverDenylisted) {
                 setSummary(R.string.restrict_background_blocklisted);
             } else {
